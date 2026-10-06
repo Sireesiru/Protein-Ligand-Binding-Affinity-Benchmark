@@ -11,33 +11,19 @@ We compare five pretrained protein representations — **ESM2, ProstT5, ProGen2,
 Rather than asking only which representation gives the highest prediction accuracy, the benchmark addresses a sequence of related questions.
 
 ### Q1. How informative is each protein representation on its own?
-
 Protein-only models measure the affinity-relevant information captured by each pretrained protein representation.
-
 ### Q2. How much does each protein representation add beyond the ligand representation?
-
 Each protein representation is combined with the same TxGemma ligand representation and compared with the ligand-only baseline.
-
 **ΔR² = R²(Protein + Ligand) − R²(Ligand)**
-
 This distinguishes **standalone representation strength** from **multimodal complementarity**.
-
 ### Q3. Are these differences robust across different data splits?
-
 Protein-only, ligand-only, and combined models are repeated across 10 random train/validation/test splits to determine whether the observed representation differences are robust.
-
 ### Q4. Do the conclusions depend on the downstream learning strategy?
-
 The original **MLP pipeline** is compared with an alternative **RF-SHAP feature-selection + XGBoost pipeline** to determine whether representation performance depends on how the embeddings are selected and learned.
-
 ### Q5. How much does the combined model rely on protein versus ligand information?
-
 SHAP-based modality attribution is used to examine model reliance on protein and ligand features within the combined representation.
-
 ### Q6. Does multimodal fusion strategy affect representation performance?
-
 Alternative feature-selection and fusion strategies are compared to determine whether the way protein and ligand representations are integrated changes their predictive utility.
-
 ---
 
 ## Study Workflow
