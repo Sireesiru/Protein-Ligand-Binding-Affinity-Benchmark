@@ -208,14 +208,14 @@ Saved split-index files under `splits/` preserve the exact seed-42 train/validat
 
 The original multimodal MLP benchmark uses:
 
-1. a 70/15/15 train/validation/test split
-2. train-only standardization of protein and ligand representations
-3. protein–ligand feature concatenation
-4. train-only mutual-information feature selection to 512 features
+1. A 70/15/15 train/validation/test split
+2. Train-only standardization of protein and ligand representations
+3. Protein–ligand feature concatenation
+4. Train-only mutual-information feature selection to 512 features
 5. Ray Tune hyperparameter optimization with ASHA
-6. representation-specific optimal configurations selected using validation performance
-7. final MLP training
-8. evaluation on the untouched test set
+6. Representation-specific optimal configurations selected using validation performance
+7. Final MLP training
+8. Evaluation on the untouched test set
 
 All protein representations were evaluated using the same hyperparameter optimization protocol and search space.
 
