@@ -1,0 +1,1495 @@
+Deactivating conda environments
+Array Task ID: 4
+Visible GPUs:
+
+
+========================================== ROCm System Management Interface ==========================================
+==================================================== Concise Info ====================================================
+Device  Node  IDs              Temp    Power  Partitions          SCLK    MCLK     Fan  Perf    PwrCap  VRAM%  GPU%  
+[3m              (DID,     GUID)  (Edge)  (Avg)  (Mem, Compute, ID)                                                     [0m
+======================================================================================================================
+0       4     0x7408,   63582  37.0°C  91.0W  N/A, N/A, 0         800Mhz  1600Mhz  0%   manual  560.0W  0%     0%    
+1       5     0x7408,   51740  38.0°C  N/A    N/A, N/A, 0         800Mhz  1600Mhz  0%   manual  0.0W    0%     0%    
+2       6     0x7408,   15961  39.0°C  90.0W  N/A, N/A, 0         800Mhz  1600Mhz  0%   manual  560.0W  0%     0%    
+3       7     0x7408,   3099   39.0°C  N/A    N/A, N/A, 0         800Mhz  1600Mhz  0%   manual  0.0W    0%     0%    
+4       8     0x7408,   13395  36.0°C  84.0W  N/A, N/A, 0         800Mhz  1600Mhz  0%   manual  560.0W  0%     0%    
+5       9     0x7408,   1553   40.0°C  N/A    N/A, N/A, 0         800Mhz  1600Mhz  0%   manual  0.0W    0%     0%    
+6       10    0x7408,   62036  29.0°C  87.0W  N/A, N/A, 0         800Mhz  1600Mhz  0%   manual  560.0W  0%     0%    
+7       11    0x7408,   49174  38.0°C  N/A    N/A, N/A, 0         800Mhz  1600Mhz  0%   manual  0.0W    0%     0%    
+======================================================================================================================
+================================================ End of ROCm SMI Log =================================================
+
+DATA FILTERING
+Original samples : 19118
+After filtering  : 19116
+Removed          : 2
+
+============================================================
+RUNNING ARRAY TASK 4: PROTGPT2
+============================================================
+Protein embedding shape: (19116, 1280)
+Ligand embedding shape : (19116, 2304)
+
+DATA SPLIT
+Train      : 13381 (70.0%)
+Validation : 2867 (15.0%)
+Test       : 2868 (15.0%)
+
+COMBINED EMBEDDINGS
+Train: (13381, 3584)
+Validation: (2867, 3584)
+Test: (2868, 3584)
+
+Running Mutual Information Feature Selection: K=512
+Selected feature shape: (13381, 512)
+╭────────────────────────────────────────────────────────────────────────────────╮
+│ Configuration for experiment     train_affinity_pipeline_2026-09-26_23-48-15   │
+├────────────────────────────────────────────────────────────────────────────────┤
+│ Search algorithm                 BasicVariantGenerator                         │
+│ Scheduler                        AsyncHyperBandScheduler                       │
+│ Number of trials                 30                                            │
+╰────────────────────────────────────────────────────────────────────────────────╯
+
+View detailed results here: /ccs/home/sireesiru/ray_results/train_affinity_pipeline_2026-09-26_23-48-15
+
+Trial status: 1 PENDING
+Current time: 2026-09-26 23:48:15. Total running time: 0s
+Logical resource usage: 2.0/16 CPUs, 1.0/1 GPUs (0.0/1.0 accelerator_type:AMD-Instinct-MI250X)
+╭────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name                            status       hidden_dim     dropout            lr     batch_size │
+├────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ train_affinity_pipeline_44c75_00000   PENDING             256    0.214422   0.000242169             64 │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Trial train_affinity_pipeline_44c75_00000 started with configuration:
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00000 config             │
+├──────────────────────────────────────────────────────────────┤
+│ batch_size                                                64 │
+│ dropout                                              0.21442 │
+│ hidden_dim                                               256 │
+│ lr                                                   0.00024 │
+╰──────────────────────────────────────────────────────────────╯
+[36m(train_affinity_pipeline pid=1140811)[0m Worker running on: cuda
+[36m(train_affinity_pipeline pid=1140811)[0m GPU Name: AMD Instinct MI250X
+
+Trial status: 1 RUNNING
+Current time: 2026-09-26 23:48:45. Total running time: 30s
+Logical resource usage: 2.0/16 CPUs, 1.0/1 GPUs (0.0/1.0 accelerator_type:AMD-Instinct-MI250X)
+╭─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name                            status       hidden_dim     dropout            lr     batch_size     iter     total time (s)     r2_score      rmse       mae │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ train_affinity_pipeline_44c75_00000   RUNNING             256    0.214422   0.000242169             64        1             16.662     -3.59436   4.01545   3.68054 │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Trial train_affinity_pipeline_44c75_00000 completed after 40 iterations at 2026-09-26 23:49:01. Total running time: 46s
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00000 result             │
+├──────────────────────────────────────────────────────────────┤
+│ checkpoint_dir_name                                          │
+│ time_this_iter_s                                     0.42629 │
+│ time_total_s                                         33.2933 │
+│ training_iteration                                        40 │
+│ mae                                                  1.05891 │
+│ r2_score                                              0.4666 │
+│ rmse                                                  1.3682 │
+╰──────────────────────────────────────────────────────────────╯
+
+Trial status: 1 TERMINATED | 1 PENDING
+Current time: 2026-09-26 23:49:15. Total running time: 1min 0s
+Logical resource usage: 2.0/16 CPUs, 1.0/1 GPUs (0.0/1.0 accelerator_type:AMD-Instinct-MI250X)
+╭──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name                            status         hidden_dim     dropout            lr     batch_size     iter     total time (s)     r2_score     rmse       mae │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ train_affinity_pipeline_44c75_00000   TERMINATED            256    0.214422   0.000242169             64       40            33.2933     0.466596   1.3682   1.05891 │
+│ train_affinity_pipeline_44c75_00001   PENDING              1024    0.128783   0.00244398             128                                                             │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Trial train_affinity_pipeline_44c75_00001 started with configuration:
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00001 config             │
+├──────────────────────────────────────────────────────────────┤
+│ batch_size                                               128 │
+│ dropout                                              0.12878 │
+│ hidden_dim                                              1024 │
+│ lr                                                   0.00244 │
+╰──────────────────────────────────────────────────────────────╯
+[36m(train_affinity_pipeline pid=1140903)[0m Worker running on: cuda
+[36m(train_affinity_pipeline pid=1140903)[0m GPU Name: AMD Instinct MI250X
+
+Trial train_affinity_pipeline_44c75_00001 completed after 40 iterations at 2026-09-26 23:49:38. Total running time: 1min 23s
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00001 result             │
+├──────────────────────────────────────────────────────────────┤
+│ checkpoint_dir_name                                          │
+│ time_this_iter_s                                     0.25605 │
+│ time_total_s                                           23.05 │
+│ training_iteration                                        40 │
+│ mae                                                  1.03565 │
+│ r2_score                                             0.47849 │
+│ rmse                                                 1.35286 │
+╰──────────────────────────────────────────────────────────────╯
+
+Trial status: 2 TERMINATED | 1 PENDING
+Current time: 2026-09-26 23:49:45. Total running time: 1min 30s
+Logical resource usage: 2.0/16 CPUs, 1.0/1 GPUs (0.0/1.0 accelerator_type:AMD-Instinct-MI250X)
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name                            status         hidden_dim     dropout            lr     batch_size     iter     total time (s)     r2_score      rmse       mae │
+├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ train_affinity_pipeline_44c75_00000   TERMINATED            256    0.214422   0.000242169             64       40            33.2933     0.466596   1.3682    1.05891 │
+│ train_affinity_pipeline_44c75_00001   TERMINATED           1024    0.128783   0.00244398             128       40            23.05       0.47849    1.35286   1.03565 │
+│ train_affinity_pipeline_44c75_00002   PENDING               256    0.388812   0.000383226             32                                                              │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Trial train_affinity_pipeline_44c75_00002 started with configuration:
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00002 config             │
+├──────────────────────────────────────────────────────────────┤
+│ batch_size                                                32 │
+│ dropout                                              0.38881 │
+│ hidden_dim                                               256 │
+│ lr                                                   0.00038 │
+╰──────────────────────────────────────────────────────────────╯
+[36m(train_affinity_pipeline pid=1140987)[0m Worker running on: cuda
+[36m(train_affinity_pipeline pid=1140987)[0m GPU Name: AMD Instinct MI250X
+
+Trial train_affinity_pipeline_44c75_00002 completed after 10 iterations at 2026-09-26 23:50:12. Total running time: 1min 57s
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00002 result             │
+├──────────────────────────────────────────────────────────────┤
+│ checkpoint_dir_name                                          │
+│ time_this_iter_s                                      0.7438 │
+│ time_total_s                                         19.8959 │
+│ training_iteration                                        10 │
+│ mae                                                  1.15694 │
+│ r2_score                                             0.38282 │
+│ rmse                                                 1.47173 │
+╰──────────────────────────────────────────────────────────────╯
+
+Trial status: 3 TERMINATED | 1 PENDING
+Current time: 2026-09-26 23:50:15. Total running time: 2min 0s
+Logical resource usage: 2.0/16 CPUs, 1.0/1 GPUs (0.0/1.0 accelerator_type:AMD-Instinct-MI250X)
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name                            status         hidden_dim     dropout            lr     batch_size     iter     total time (s)     r2_score      rmse       mae │
+├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ train_affinity_pipeline_44c75_00000   TERMINATED            256    0.214422   0.000242169             64       40            33.2933     0.466596   1.3682    1.05891 │
+│ train_affinity_pipeline_44c75_00001   TERMINATED           1024    0.128783   0.00244398             128       40            23.05       0.47849    1.35286   1.03565 │
+│ train_affinity_pipeline_44c75_00002   TERMINATED            256    0.388812   0.000383226             32       10            19.8959     0.382818   1.47173   1.15694 │
+│ train_affinity_pipeline_44c75_00003   PENDING               512    0.252      0.00252332              32                                                              │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Trial train_affinity_pipeline_44c75_00003 started with configuration:
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00003 config             │
+├──────────────────────────────────────────────────────────────┤
+│ batch_size                                                32 │
+│ dropout                                                0.252 │
+│ hidden_dim                                               512 │
+│ lr                                                   0.00252 │
+╰──────────────────────────────────────────────────────────────╯
+[36m(train_affinity_pipeline pid=1141068)[0m Worker running on: cuda
+[36m(train_affinity_pipeline pid=1141068)[0m GPU Name: AMD Instinct MI250X
+
+Trial train_affinity_pipeline_44c75_00003 completed after 10 iterations at 2026-09-26 23:50:44. Total running time: 2min 29s
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00003 result             │
+├──────────────────────────────────────────────────────────────┤
+│ checkpoint_dir_name                                          │
+│ time_this_iter_s                                     0.74193 │
+│ time_total_s                                         20.0442 │
+│ training_iteration                                        10 │
+│ mae                                                  1.08684 │
+│ r2_score                                             0.44779 │
+│ rmse                                                 1.39212 │
+╰──────────────────────────────────────────────────────────────╯
+
+Trial status: 4 TERMINATED | 1 PENDING
+Current time: 2026-09-26 23:50:45. Total running time: 2min 30s
+Logical resource usage: 0/16 CPUs, 0/1 GPUs (0.0/1.0 accelerator_type:AMD-Instinct-MI250X)
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name                            status         hidden_dim     dropout            lr     batch_size     iter     total time (s)     r2_score      rmse       mae │
+├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ train_affinity_pipeline_44c75_00000   TERMINATED            256    0.214422   0.000242169             64       40            33.2933     0.466596   1.3682    1.05891 │
+│ train_affinity_pipeline_44c75_00001   TERMINATED           1024    0.128783   0.00244398             128       40            23.05       0.47849    1.35286   1.03565 │
+│ train_affinity_pipeline_44c75_00002   TERMINATED            256    0.388812   0.000383226             32       10            19.8959     0.382818   1.47173   1.15694 │
+│ train_affinity_pipeline_44c75_00003   TERMINATED            512    0.252      0.00252332              32       10            20.0442     0.447786   1.39212   1.08684 │
+│ train_affinity_pipeline_44c75_00004   PENDING               512    0.183388   0.000705962            128                                                              │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Trial train_affinity_pipeline_44c75_00004 started with configuration:
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00004 config             │
+├──────────────────────────────────────────────────────────────┤
+│ batch_size                                               128 │
+│ dropout                                              0.18339 │
+│ hidden_dim                                               512 │
+│ lr                                                   0.00071 │
+╰──────────────────────────────────────────────────────────────╯
+[36m(train_affinity_pipeline pid=1141148)[0m Worker running on: cuda
+[36m(train_affinity_pipeline pid=1141148)[0m GPU Name: AMD Instinct MI250X
+
+Trial status: 4 TERMINATED | 1 RUNNING
+Current time: 2026-09-26 23:51:15. Total running time: 3min 0s
+Logical resource usage: 2.0/16 CPUs, 1.0/1 GPUs (0.0/1.0 accelerator_type:AMD-Instinct-MI250X)
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name                            status         hidden_dim     dropout            lr     batch_size     iter     total time (s)     r2_score      rmse       mae │
+├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ train_affinity_pipeline_44c75_00004   RUNNING               512    0.183388   0.000705962            128       21            17.9299     0.475926   1.35618   1.04805 │
+│ train_affinity_pipeline_44c75_00000   TERMINATED            256    0.214422   0.000242169             64       40            33.2933     0.466596   1.3682    1.05891 │
+│ train_affinity_pipeline_44c75_00001   TERMINATED           1024    0.128783   0.00244398             128       40            23.05       0.47849    1.35286   1.03565 │
+│ train_affinity_pipeline_44c75_00002   TERMINATED            256    0.388812   0.000383226             32       10            19.8959     0.382818   1.47173   1.15694 │
+│ train_affinity_pipeline_44c75_00003   TERMINATED            512    0.252      0.00252332              32       10            20.0442     0.447786   1.39212   1.08684 │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Trial train_affinity_pipeline_44c75_00004 completed after 40 iterations at 2026-09-26 23:51:20. Total running time: 3min 5s
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00004 result             │
+├──────────────────────────────────────────────────────────────┤
+│ checkpoint_dir_name                                          │
+│ time_this_iter_s                                     0.26767 │
+│ time_total_s                                         22.9676 │
+│ training_iteration                                        40 │
+│ mae                                                  1.02009 │
+│ r2_score                                             0.49582 │
+│ rmse                                                  1.3302 │
+╰──────────────────────────────────────────────────────────────╯
+
+Trial train_affinity_pipeline_44c75_00005 started with configuration:
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00005 config             │
+├──────────────────────────────────────────────────────────────┤
+│ batch_size                                                64 │
+│ dropout                                              0.12175 │
+│ hidden_dim                                               512 │
+│ lr                                                   0.00331 │
+╰──────────────────────────────────────────────────────────────╯
+[36m(train_affinity_pipeline pid=1141230)[0m Worker running on: cuda
+[36m(train_affinity_pipeline pid=1141230)[0m GPU Name: AMD Instinct MI250X
+
+Trial status: 5 TERMINATED | 1 RUNNING
+Current time: 2026-09-26 23:51:45. Total running time: 3min 30s
+Logical resource usage: 2.0/16 CPUs, 1.0/1 GPUs (0.0/1.0 accelerator_type:AMD-Instinct-MI250X)
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name                            status         hidden_dim     dropout            lr     batch_size     iter     total time (s)     r2_score      rmse       mae │
+├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ train_affinity_pipeline_44c75_00005   RUNNING               512    0.121747   0.00331421              64                                                              │
+│ train_affinity_pipeline_44c75_00000   TERMINATED            256    0.214422   0.000242169             64       40            33.2933     0.466596   1.3682    1.05891 │
+│ train_affinity_pipeline_44c75_00001   TERMINATED           1024    0.128783   0.00244398             128       40            23.05       0.47849    1.35286   1.03565 │
+│ train_affinity_pipeline_44c75_00002   TERMINATED            256    0.388812   0.000383226             32       10            19.8959     0.382818   1.47173   1.15694 │
+│ train_affinity_pipeline_44c75_00003   TERMINATED            512    0.252      0.00252332              32       10            20.0442     0.447786   1.39212   1.08684 │
+│ train_affinity_pipeline_44c75_00004   TERMINATED            512    0.183388   0.000705962            128       40            22.9676     0.495819   1.3302    1.02009 │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Trial train_affinity_pipeline_44c75_00005 completed after 10 iterations at 2026-09-26 23:51:50. Total running time: 3min 34s
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00005 result             │
+├──────────────────────────────────────────────────────────────┤
+│ checkpoint_dir_name                                          │
+│ time_this_iter_s                                     0.43869 │
+│ time_total_s                                         16.7918 │
+│ training_iteration                                        10 │
+│ mae                                                  1.11701 │
+│ r2_score                                             0.42678 │
+│ rmse                                                 1.41834 │
+╰──────────────────────────────────────────────────────────────╯
+
+Trial train_affinity_pipeline_44c75_00006 started with configuration:
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00006 config             │
+├──────────────────────────────────────────────────────────────┤
+│ batch_size                                               128 │
+│ dropout                                              0.32755 │
+│ hidden_dim                                               256 │
+│ lr                                                   0.00971 │
+╰──────────────────────────────────────────────────────────────╯
+[36m(train_affinity_pipeline pid=1141308)[0m Worker running on: cuda
+[36m(train_affinity_pipeline pid=1141308)[0m GPU Name: AMD Instinct MI250X
+
+Trial status: 6 TERMINATED | 1 RUNNING
+Current time: 2026-09-26 23:52:15. Total running time: 4min 0s
+Logical resource usage: 2.0/16 CPUs, 1.0/1 GPUs (0.0/1.0 accelerator_type:AMD-Instinct-MI250X)
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name                            status         hidden_dim     dropout            lr     batch_size     iter     total time (s)     r2_score      rmse       mae │
+├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ train_affinity_pipeline_44c75_00006   RUNNING               256    0.32755    0.0097137              128        4            13.1975     0.347283   1.51351   1.19962 │
+│ train_affinity_pipeline_44c75_00000   TERMINATED            256    0.214422   0.000242169             64       40            33.2933     0.466596   1.3682    1.05891 │
+│ train_affinity_pipeline_44c75_00001   TERMINATED           1024    0.128783   0.00244398             128       40            23.05       0.47849    1.35286   1.03565 │
+│ train_affinity_pipeline_44c75_00002   TERMINATED            256    0.388812   0.000383226             32       10            19.8959     0.382818   1.47173   1.15694 │
+│ train_affinity_pipeline_44c75_00003   TERMINATED            512    0.252      0.00252332              32       10            20.0442     0.447786   1.39212   1.08684 │
+│ train_affinity_pipeline_44c75_00004   TERMINATED            512    0.183388   0.000705962            128       40            22.9676     0.495819   1.3302    1.02009 │
+│ train_affinity_pipeline_44c75_00005   TERMINATED            512    0.121747   0.00331421              64       10            16.7918     0.426784   1.41834   1.11701 │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Trial train_affinity_pipeline_44c75_00006 completed after 10 iterations at 2026-09-26 23:52:17. Total running time: 4min 2s
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00006 result             │
+├──────────────────────────────────────────────────────────────┤
+│ checkpoint_dir_name                                          │
+│ time_this_iter_s                                     0.27215 │
+│ time_total_s                                         14.9336 │
+│ training_iteration                                        10 │
+│ mae                                                  1.15752 │
+│ r2_score                                             0.39088 │
+│ rmse                                                 1.46208 │
+╰──────────────────────────────────────────────────────────────╯
+
+Trial train_affinity_pipeline_44c75_00007 started with configuration:
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00007 config             │
+├──────────────────────────────────────────────────────────────┤
+│ batch_size                                                32 │
+│ dropout                                              0.12337 │
+│ hidden_dim                                               256 │
+│ lr                                                   0.00325 │
+╰──────────────────────────────────────────────────────────────╯
+[36m(train_affinity_pipeline pid=1141389)[0m Worker running on: cuda
+[36m(train_affinity_pipeline pid=1141389)[0m GPU Name: AMD Instinct MI250X
+
+Trial status: 7 TERMINATED | 1 RUNNING
+Current time: 2026-09-26 23:52:45. Total running time: 4min 30s
+Logical resource usage: 2.0/16 CPUs, 1.0/1 GPUs (0.0/1.0 accelerator_type:AMD-Instinct-MI250X)
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name                            status         hidden_dim     dropout            lr     batch_size     iter     total time (s)     r2_score      rmse       mae │
+├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ train_affinity_pipeline_44c75_00007   RUNNING               256    0.12337    0.00324517              32        6            16.4955     0.410633   1.43819   1.1241  │
+│ train_affinity_pipeline_44c75_00000   TERMINATED            256    0.214422   0.000242169             64       40            33.2933     0.466596   1.3682    1.05891 │
+│ train_affinity_pipeline_44c75_00001   TERMINATED           1024    0.128783   0.00244398             128       40            23.05       0.47849    1.35286   1.03565 │
+│ train_affinity_pipeline_44c75_00002   TERMINATED            256    0.388812   0.000383226             32       10            19.8959     0.382818   1.47173   1.15694 │
+│ train_affinity_pipeline_44c75_00003   TERMINATED            512    0.252      0.00252332              32       10            20.0442     0.447786   1.39212   1.08684 │
+│ train_affinity_pipeline_44c75_00004   TERMINATED            512    0.183388   0.000705962            128       40            22.9676     0.495819   1.3302    1.02009 │
+│ train_affinity_pipeline_44c75_00005   TERMINATED            512    0.121747   0.00331421              64       10            16.7918     0.426784   1.41834   1.11701 │
+│ train_affinity_pipeline_44c75_00006   TERMINATED            256    0.32755    0.0097137              128       10            14.9336     0.390883   1.46208   1.15752 │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Trial train_affinity_pipeline_44c75_00007 completed after 20 iterations at 2026-09-26 23:52:55. Total running time: 4min 40s
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00007 result             │
+├──────────────────────────────────────────────────────────────┤
+│ checkpoint_dir_name                                          │
+│ time_this_iter_s                                     0.73991 │
+│ time_total_s                                         26.8917 │
+│ training_iteration                                        20 │
+│ mae                                                   1.0594 │
+│ r2_score                                             0.47177 │
+│ rmse                                                 1.36155 │
+╰──────────────────────────────────────────────────────────────╯
+
+Trial train_affinity_pipeline_44c75_00008 started with configuration:
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00008 config             │
+├──────────────────────────────────────────────────────────────┤
+│ batch_size                                               128 │
+│ dropout                                              0.21454 │
+│ hidden_dim                                               512 │
+│ lr                                                   0.00057 │
+╰──────────────────────────────────────────────────────────────╯
+[36m(train_affinity_pipeline pid=1141467)[0m Worker running on: cuda
+[36m(train_affinity_pipeline pid=1141467)[0m GPU Name: AMD Instinct MI250X
+
+Trial status: 8 TERMINATED | 1 RUNNING
+Current time: 2026-09-26 23:53:15. Total running time: 5min 0s
+Logical resource usage: 2.0/16 CPUs, 1.0/1 GPUs (0.0/1.0 accelerator_type:AMD-Instinct-MI250X)
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name                            status         hidden_dim     dropout            lr     batch_size     iter     total time (s)     r2_score      rmse       mae │
+├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ train_affinity_pipeline_44c75_00008   RUNNING               512    0.214538   0.000572764            128                                                              │
+│ train_affinity_pipeline_44c75_00000   TERMINATED            256    0.214422   0.000242169             64       40            33.2933     0.466596   1.3682    1.05891 │
+│ train_affinity_pipeline_44c75_00001   TERMINATED           1024    0.128783   0.00244398             128       40            23.05       0.47849    1.35286   1.03565 │
+│ train_affinity_pipeline_44c75_00002   TERMINATED            256    0.388812   0.000383226             32       10            19.8959     0.382818   1.47173   1.15694 │
+│ train_affinity_pipeline_44c75_00003   TERMINATED            512    0.252      0.00252332              32       10            20.0442     0.447786   1.39212   1.08684 │
+│ train_affinity_pipeline_44c75_00004   TERMINATED            512    0.183388   0.000705962            128       40            22.9676     0.495819   1.3302    1.02009 │
+│ train_affinity_pipeline_44c75_00005   TERMINATED            512    0.121747   0.00331421              64       10            16.7918     0.426784   1.41834   1.11701 │
+│ train_affinity_pipeline_44c75_00006   TERMINATED            256    0.32755    0.0097137              128       10            14.9336     0.390883   1.46208   1.15752 │
+│ train_affinity_pipeline_44c75_00007   TERMINATED            256    0.12337    0.00324517              32       20            26.8917     0.47177    1.36155   1.0594  │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Trial train_affinity_pipeline_44c75_00008 completed after 40 iterations at 2026-09-26 23:53:33. Total running time: 5min 17s
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00008 result             │
+├──────────────────────────────────────────────────────────────┤
+│ checkpoint_dir_name                                          │
+│ time_this_iter_s                                     0.26639 │
+│ time_total_s                                         23.3524 │
+│ training_iteration                                        40 │
+│ mae                                                  1.01868 │
+│ r2_score                                             0.49849 │
+│ rmse                                                 1.32667 │
+╰──────────────────────────────────────────────────────────────╯
+
+Trial train_affinity_pipeline_44c75_00009 started with configuration:
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00009 config             │
+├──────────────────────────────────────────────────────────────┤
+│ batch_size                                               128 │
+│ dropout                                              0.26183 │
+│ hidden_dim                                               512 │
+│ lr                                                   0.00124 │
+╰──────────────────────────────────────────────────────────────╯
+[36m(train_affinity_pipeline pid=1141545)[0m Worker running on: cuda
+[36m(train_affinity_pipeline pid=1141545)[0m GPU Name: AMD Instinct MI250X
+
+Trial status: 9 TERMINATED | 1 RUNNING
+Current time: 2026-09-26 23:53:45. Total running time: 5min 30s
+Logical resource usage: 2.0/16 CPUs, 1.0/1 GPUs (0.0/1.0 accelerator_type:AMD-Instinct-MI250X)
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name                            status         hidden_dim     dropout            lr     batch_size     iter     total time (s)     r2_score      rmse       mae │
+├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ train_affinity_pipeline_44c75_00009   RUNNING               512    0.261826   0.00124177             128                                                              │
+│ train_affinity_pipeline_44c75_00000   TERMINATED            256    0.214422   0.000242169             64       40            33.2933     0.466596   1.3682    1.05891 │
+│ train_affinity_pipeline_44c75_00001   TERMINATED           1024    0.128783   0.00244398             128       40            23.05       0.47849    1.35286   1.03565 │
+│ train_affinity_pipeline_44c75_00002   TERMINATED            256    0.388812   0.000383226             32       10            19.8959     0.382818   1.47173   1.15694 │
+│ train_affinity_pipeline_44c75_00003   TERMINATED            512    0.252      0.00252332              32       10            20.0442     0.447786   1.39212   1.08684 │
+│ train_affinity_pipeline_44c75_00004   TERMINATED            512    0.183388   0.000705962            128       40            22.9676     0.495819   1.3302    1.02009 │
+│ train_affinity_pipeline_44c75_00005   TERMINATED            512    0.121747   0.00331421              64       10            16.7918     0.426784   1.41834   1.11701 │
+│ train_affinity_pipeline_44c75_00006   TERMINATED            256    0.32755    0.0097137              128       10            14.9336     0.390883   1.46208   1.15752 │
+│ train_affinity_pipeline_44c75_00007   TERMINATED            256    0.12337    0.00324517              32       20            26.8917     0.47177    1.36155   1.0594  │
+│ train_affinity_pipeline_44c75_00008   TERMINATED            512    0.214538   0.000572764            128       40            23.3524     0.498489   1.32667   1.01868 │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Trial train_affinity_pipeline_44c75_00009 completed after 40 iterations at 2026-09-26 23:54:08. Total running time: 5min 53s
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00009 result             │
+├──────────────────────────────────────────────────────────────┤
+│ checkpoint_dir_name                                          │
+│ time_this_iter_s                                     0.26164 │
+│ time_total_s                                         22.9062 │
+│ training_iteration                                        40 │
+│ mae                                                  1.01957 │
+│ r2_score                                             0.50157 │
+│ rmse                                                 1.32259 │
+╰──────────────────────────────────────────────────────────────╯
+
+Trial status: 10 TERMINATED | 1 PENDING
+Current time: 2026-09-26 23:54:15. Total running time: 6min 0s
+Logical resource usage: 2.0/16 CPUs, 1.0/1 GPUs (0.0/1.0 accelerator_type:AMD-Instinct-MI250X)
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name                            status         hidden_dim     dropout            lr     batch_size     iter     total time (s)     r2_score      rmse       mae │
+├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ train_affinity_pipeline_44c75_00000   TERMINATED            256    0.214422   0.000242169             64       40            33.2933     0.466596   1.3682    1.05891 │
+│ train_affinity_pipeline_44c75_00001   TERMINATED           1024    0.128783   0.00244398             128       40            23.05       0.47849    1.35286   1.03565 │
+│ train_affinity_pipeline_44c75_00002   TERMINATED            256    0.388812   0.000383226             32       10            19.8959     0.382818   1.47173   1.15694 │
+│ train_affinity_pipeline_44c75_00003   TERMINATED            512    0.252      0.00252332              32       10            20.0442     0.447786   1.39212   1.08684 │
+│ train_affinity_pipeline_44c75_00004   TERMINATED            512    0.183388   0.000705962            128       40            22.9676     0.495819   1.3302    1.02009 │
+│ train_affinity_pipeline_44c75_00005   TERMINATED            512    0.121747   0.00331421              64       10            16.7918     0.426784   1.41834   1.11701 │
+│ train_affinity_pipeline_44c75_00006   TERMINATED            256    0.32755    0.0097137              128       10            14.9336     0.390883   1.46208   1.15752 │
+│ train_affinity_pipeline_44c75_00007   TERMINATED            256    0.12337    0.00324517              32       20            26.8917     0.47177    1.36155   1.0594  │
+│ train_affinity_pipeline_44c75_00008   TERMINATED            512    0.214538   0.000572764            128       40            23.3524     0.498489   1.32667   1.01868 │
+│ train_affinity_pipeline_44c75_00009   TERMINATED            512    0.261826   0.00124177             128       40            22.9062     0.501567   1.32259   1.01957 │
+│ train_affinity_pipeline_44c75_00010   PENDING               512    0.159574   0.00319245              32                                                              │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Trial train_affinity_pipeline_44c75_00010 started with configuration:
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00010 config             │
+├──────────────────────────────────────────────────────────────┤
+│ batch_size                                                32 │
+│ dropout                                              0.15957 │
+│ hidden_dim                                               512 │
+│ lr                                                   0.00319 │
+╰──────────────────────────────────────────────────────────────╯
+[36m(train_affinity_pipeline pid=1141624)[0m Worker running on: cuda
+[36m(train_affinity_pipeline pid=1141624)[0m GPU Name: AMD Instinct MI250X
+
+Trial status: 10 TERMINATED | 1 RUNNING
+Current time: 2026-09-26 23:54:45. Total running time: 6min 30s
+Logical resource usage: 2.0/16 CPUs, 1.0/1 GPUs (0.0/1.0 accelerator_type:AMD-Instinct-MI250X)
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name                            status         hidden_dim     dropout            lr     batch_size     iter     total time (s)     r2_score      rmse       mae │
+├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ train_affinity_pipeline_44c75_00010   RUNNING               512    0.159574   0.00319245              32       15            23.5608     0.445059   1.39555   1.09632 │
+│ train_affinity_pipeline_44c75_00000   TERMINATED            256    0.214422   0.000242169             64       40            33.2933     0.466596   1.3682    1.05891 │
+│ train_affinity_pipeline_44c75_00001   TERMINATED           1024    0.128783   0.00244398             128       40            23.05       0.47849    1.35286   1.03565 │
+│ train_affinity_pipeline_44c75_00002   TERMINATED            256    0.388812   0.000383226             32       10            19.8959     0.382818   1.47173   1.15694 │
+│ train_affinity_pipeline_44c75_00003   TERMINATED            512    0.252      0.00252332              32       10            20.0442     0.447786   1.39212   1.08684 │
+│ train_affinity_pipeline_44c75_00004   TERMINATED            512    0.183388   0.000705962            128       40            22.9676     0.495819   1.3302    1.02009 │
+│ train_affinity_pipeline_44c75_00005   TERMINATED            512    0.121747   0.00331421              64       10            16.7918     0.426784   1.41834   1.11701 │
+│ train_affinity_pipeline_44c75_00006   TERMINATED            256    0.32755    0.0097137              128       10            14.9336     0.390883   1.46208   1.15752 │
+│ train_affinity_pipeline_44c75_00007   TERMINATED            256    0.12337    0.00324517              32       20            26.8917     0.47177    1.36155   1.0594  │
+│ train_affinity_pipeline_44c75_00008   TERMINATED            512    0.214538   0.000572764            128       40            23.3524     0.498489   1.32667   1.01868 │
+│ train_affinity_pipeline_44c75_00009   TERMINATED            512    0.261826   0.00124177             128       40            22.9062     0.501567   1.32259   1.01957 │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Trial train_affinity_pipeline_44c75_00010 completed after 40 iterations at 2026-09-26 23:55:03. Total running time: 6min 48s
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00010 result             │
+├──────────────────────────────────────────────────────────────┤
+│ checkpoint_dir_name                                          │
+│ time_this_iter_s                                     0.73246 │
+│ time_total_s                                         42.0736 │
+│ training_iteration                                        40 │
+│ mae                                                  1.01787 │
+│ r2_score                                             0.50183 │
+│ rmse                                                 1.32224 │
+╰──────────────────────────────────────────────────────────────╯
+
+Trial status: 11 TERMINATED | 1 PENDING
+Current time: 2026-09-26 23:55:15. Total running time: 7min 0s
+Logical resource usage: 2.0/16 CPUs, 1.0/1 GPUs (0.0/1.0 accelerator_type:AMD-Instinct-MI250X)
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name                            status         hidden_dim     dropout            lr     batch_size     iter     total time (s)     r2_score      rmse       mae │
+├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ train_affinity_pipeline_44c75_00000   TERMINATED            256    0.214422   0.000242169             64       40            33.2933     0.466596   1.3682    1.05891 │
+│ train_affinity_pipeline_44c75_00001   TERMINATED           1024    0.128783   0.00244398             128       40            23.05       0.47849    1.35286   1.03565 │
+│ train_affinity_pipeline_44c75_00002   TERMINATED            256    0.388812   0.000383226             32       10            19.8959     0.382818   1.47173   1.15694 │
+│ train_affinity_pipeline_44c75_00003   TERMINATED            512    0.252      0.00252332              32       10            20.0442     0.447786   1.39212   1.08684 │
+│ train_affinity_pipeline_44c75_00004   TERMINATED            512    0.183388   0.000705962            128       40            22.9676     0.495819   1.3302    1.02009 │
+│ train_affinity_pipeline_44c75_00005   TERMINATED            512    0.121747   0.00331421              64       10            16.7918     0.426784   1.41834   1.11701 │
+│ train_affinity_pipeline_44c75_00006   TERMINATED            256    0.32755    0.0097137              128       10            14.9336     0.390883   1.46208   1.15752 │
+│ train_affinity_pipeline_44c75_00007   TERMINATED            256    0.12337    0.00324517              32       20            26.8917     0.47177    1.36155   1.0594  │
+│ train_affinity_pipeline_44c75_00008   TERMINATED            512    0.214538   0.000572764            128       40            23.3524     0.498489   1.32667   1.01868 │
+│ train_affinity_pipeline_44c75_00009   TERMINATED            512    0.261826   0.00124177             128       40            22.9062     0.501567   1.32259   1.01957 │
+│ train_affinity_pipeline_44c75_00010   TERMINATED            512    0.159574   0.00319245              32       40            42.0736     0.501829   1.32224   1.01787 │
+│ train_affinity_pipeline_44c75_00011   PENDING               256    0.202489   0.000136297             64                                                              │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Trial train_affinity_pipeline_44c75_00011 started with configuration:
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00011 config             │
+├──────────────────────────────────────────────────────────────┤
+│ batch_size                                                64 │
+│ dropout                                              0.20249 │
+│ hidden_dim                                               256 │
+│ lr                                                   0.00014 │
+╰──────────────────────────────────────────────────────────────╯
+[36m(train_affinity_pipeline pid=1141707)[0m Worker running on: cuda
+[36m(train_affinity_pipeline pid=1141707)[0m GPU Name: AMD Instinct MI250X
+
+Trial train_affinity_pipeline_44c75_00011 completed after 10 iterations at 2026-09-26 23:55:34. Total running time: 7min 19s
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00011 result             │
+├──────────────────────────────────────────────────────────────┤
+│ checkpoint_dir_name                                          │
+│ time_this_iter_s                                      0.4369 │
+│ time_total_s                                         16.9354 │
+│ training_iteration                                        10 │
+│ mae                                                  1.11445 │
+│ r2_score                                             0.42421 │
+│ rmse                                                 1.42152 │
+╰──────────────────────────────────────────────────────────────╯
+
+Trial status: 12 TERMINATED | 1 PENDING
+Current time: 2026-09-26 23:55:45. Total running time: 7min 30s
+Logical resource usage: 2.0/16 CPUs, 1.0/1 GPUs (0.0/1.0 accelerator_type:AMD-Instinct-MI250X)
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name                            status         hidden_dim     dropout            lr     batch_size     iter     total time (s)     r2_score      rmse       mae │
+├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ train_affinity_pipeline_44c75_00000   TERMINATED            256    0.214422   0.000242169             64       40            33.2933     0.466596   1.3682    1.05891 │
+│ train_affinity_pipeline_44c75_00001   TERMINATED           1024    0.128783   0.00244398             128       40            23.05       0.47849    1.35286   1.03565 │
+│ train_affinity_pipeline_44c75_00002   TERMINATED            256    0.388812   0.000383226             32       10            19.8959     0.382818   1.47173   1.15694 │
+│ train_affinity_pipeline_44c75_00003   TERMINATED            512    0.252      0.00252332              32       10            20.0442     0.447786   1.39212   1.08684 │
+│ train_affinity_pipeline_44c75_00004   TERMINATED            512    0.183388   0.000705962            128       40            22.9676     0.495819   1.3302    1.02009 │
+│ train_affinity_pipeline_44c75_00005   TERMINATED            512    0.121747   0.00331421              64       10            16.7918     0.426784   1.41834   1.11701 │
+│ train_affinity_pipeline_44c75_00006   TERMINATED            256    0.32755    0.0097137              128       10            14.9336     0.390883   1.46208   1.15752 │
+│ train_affinity_pipeline_44c75_00007   TERMINATED            256    0.12337    0.00324517              32       20            26.8917     0.47177    1.36155   1.0594  │
+│ train_affinity_pipeline_44c75_00008   TERMINATED            512    0.214538   0.000572764            128       40            23.3524     0.498489   1.32667   1.01868 │
+│ train_affinity_pipeline_44c75_00009   TERMINATED            512    0.261826   0.00124177             128       40            22.9062     0.501567   1.32259   1.01957 │
+│ train_affinity_pipeline_44c75_00010   TERMINATED            512    0.159574   0.00319245              32       40            42.0736     0.501829   1.32224   1.01787 │
+│ train_affinity_pipeline_44c75_00011   TERMINATED            256    0.202489   0.000136297             64       10            16.9354     0.424214   1.42152   1.11445 │
+│ train_affinity_pipeline_44c75_00012   PENDING               256    0.253406   0.00658773              32                                                              │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Trial train_affinity_pipeline_44c75_00012 started with configuration:
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00012 config             │
+├──────────────────────────────────────────────────────────────┤
+│ batch_size                                                32 │
+│ dropout                                              0.25341 │
+│ hidden_dim                                               256 │
+│ lr                                                   0.00659 │
+╰──────────────────────────────────────────────────────────────╯
+[36m(train_affinity_pipeline pid=1141785)[0m Worker running on: cuda
+[36m(train_affinity_pipeline pid=1141785)[0m GPU Name: AMD Instinct MI250X
+
+Trial train_affinity_pipeline_44c75_00012 completed after 10 iterations at 2026-09-26 23:56:06. Total running time: 7min 51s
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00012 result             │
+├──────────────────────────────────────────────────────────────┤
+│ checkpoint_dir_name                                          │
+│ time_this_iter_s                                     0.73882 │
+│ time_total_s                                         19.7983 │
+│ training_iteration                                        10 │
+│ mae                                                  1.09749 │
+│ r2_score                                             0.44577 │
+│ rmse                                                 1.39465 │
+╰──────────────────────────────────────────────────────────────╯
+
+Trial status: 13 TERMINATED | 1 PENDING
+Current time: 2026-09-26 23:56:16. Total running time: 8min 0s
+Logical resource usage: 2.0/16 CPUs, 1.0/1 GPUs (0.0/1.0 accelerator_type:AMD-Instinct-MI250X)
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name                            status         hidden_dim     dropout            lr     batch_size     iter     total time (s)     r2_score      rmse       mae │
+├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ train_affinity_pipeline_44c75_00000   TERMINATED            256    0.214422   0.000242169             64       40            33.2933     0.466596   1.3682    1.05891 │
+│ train_affinity_pipeline_44c75_00001   TERMINATED           1024    0.128783   0.00244398             128       40            23.05       0.47849    1.35286   1.03565 │
+│ train_affinity_pipeline_44c75_00002   TERMINATED            256    0.388812   0.000383226             32       10            19.8959     0.382818   1.47173   1.15694 │
+│ train_affinity_pipeline_44c75_00003   TERMINATED            512    0.252      0.00252332              32       10            20.0442     0.447786   1.39212   1.08684 │
+│ train_affinity_pipeline_44c75_00004   TERMINATED            512    0.183388   0.000705962            128       40            22.9676     0.495819   1.3302    1.02009 │
+│ train_affinity_pipeline_44c75_00005   TERMINATED            512    0.121747   0.00331421              64       10            16.7918     0.426784   1.41834   1.11701 │
+│ train_affinity_pipeline_44c75_00006   TERMINATED            256    0.32755    0.0097137              128       10            14.9336     0.390883   1.46208   1.15752 │
+│ train_affinity_pipeline_44c75_00007   TERMINATED            256    0.12337    0.00324517              32       20            26.8917     0.47177    1.36155   1.0594  │
+│ train_affinity_pipeline_44c75_00008   TERMINATED            512    0.214538   0.000572764            128       40            23.3524     0.498489   1.32667   1.01868 │
+│ train_affinity_pipeline_44c75_00009   TERMINATED            512    0.261826   0.00124177             128       40            22.9062     0.501567   1.32259   1.01957 │
+│ train_affinity_pipeline_44c75_00010   TERMINATED            512    0.159574   0.00319245              32       40            42.0736     0.501829   1.32224   1.01787 │
+│ train_affinity_pipeline_44c75_00011   TERMINATED            256    0.202489   0.000136297             64       10            16.9354     0.424214   1.42152   1.11445 │
+│ train_affinity_pipeline_44c75_00012   TERMINATED            256    0.253406   0.00658773              32       10            19.7983     0.445771   1.39465   1.09749 │
+│ train_affinity_pipeline_44c75_00013   PENDING               512    0.294315   0.000282899             64                                                              │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Trial train_affinity_pipeline_44c75_00013 started with configuration:
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00013 config             │
+├──────────────────────────────────────────────────────────────┤
+│ batch_size                                                64 │
+│ dropout                                              0.29432 │
+│ hidden_dim                                               512 │
+│ lr                                                   0.00028 │
+╰──────────────────────────────────────────────────────────────╯
+[36m(train_affinity_pipeline pid=1141864)[0m Worker running on: cuda
+[36m(train_affinity_pipeline pid=1141864)[0m GPU Name: AMD Instinct MI250X
+
+Trial train_affinity_pipeline_44c75_00013 completed after 10 iterations at 2026-09-26 23:56:35. Total running time: 8min 20s
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00013 result             │
+├──────────────────────────────────────────────────────────────┤
+│ checkpoint_dir_name                                          │
+│ time_this_iter_s                                     0.43772 │
+│ time_total_s                                         16.8414 │
+│ training_iteration                                        10 │
+│ mae                                                  1.12305 │
+│ r2_score                                              0.4216 │
+│ rmse                                                 1.42475 │
+╰──────────────────────────────────────────────────────────────╯
+
+Trial status: 14 TERMINATED | 1 PENDING
+Current time: 2026-09-26 23:56:46. Total running time: 8min 30s
+Logical resource usage: 2.0/16 CPUs, 1.0/1 GPUs (0.0/1.0 accelerator_type:AMD-Instinct-MI250X)
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name                            status         hidden_dim     dropout            lr     batch_size     iter     total time (s)     r2_score      rmse       mae │
+├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ train_affinity_pipeline_44c75_00000   TERMINATED            256    0.214422   0.000242169             64       40            33.2933     0.466596   1.3682    1.05891 │
+│ train_affinity_pipeline_44c75_00001   TERMINATED           1024    0.128783   0.00244398             128       40            23.05       0.47849    1.35286   1.03565 │
+│ train_affinity_pipeline_44c75_00002   TERMINATED            256    0.388812   0.000383226             32       10            19.8959     0.382818   1.47173   1.15694 │
+│ train_affinity_pipeline_44c75_00003   TERMINATED            512    0.252      0.00252332              32       10            20.0442     0.447786   1.39212   1.08684 │
+│ train_affinity_pipeline_44c75_00004   TERMINATED            512    0.183388   0.000705962            128       40            22.9676     0.495819   1.3302    1.02009 │
+│ train_affinity_pipeline_44c75_00005   TERMINATED            512    0.121747   0.00331421              64       10            16.7918     0.426784   1.41834   1.11701 │
+│ train_affinity_pipeline_44c75_00006   TERMINATED            256    0.32755    0.0097137              128       10            14.9336     0.390883   1.46208   1.15752 │
+│ train_affinity_pipeline_44c75_00007   TERMINATED            256    0.12337    0.00324517              32       20            26.8917     0.47177    1.36155   1.0594  │
+│ train_affinity_pipeline_44c75_00008   TERMINATED            512    0.214538   0.000572764            128       40            23.3524     0.498489   1.32667   1.01868 │
+│ train_affinity_pipeline_44c75_00009   TERMINATED            512    0.261826   0.00124177             128       40            22.9062     0.501567   1.32259   1.01957 │
+│ train_affinity_pipeline_44c75_00010   TERMINATED            512    0.159574   0.00319245              32       40            42.0736     0.501829   1.32224   1.01787 │
+│ train_affinity_pipeline_44c75_00011   TERMINATED            256    0.202489   0.000136297             64       10            16.9354     0.424214   1.42152   1.11445 │
+│ train_affinity_pipeline_44c75_00012   TERMINATED            256    0.253406   0.00658773              32       10            19.7983     0.445771   1.39465   1.09749 │
+│ train_affinity_pipeline_44c75_00013   TERMINATED            512    0.294315   0.000282899             64       10            16.8415     0.421597   1.42475   1.12305 │
+│ train_affinity_pipeline_44c75_00014   PENDING               512    0.385198   0.000408637             64                                                              │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Trial train_affinity_pipeline_44c75_00014 started with configuration:
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00014 config             │
+├──────────────────────────────────────────────────────────────┤
+│ batch_size                                                64 │
+│ dropout                                               0.3852 │
+│ hidden_dim                                               512 │
+│ lr                                                   0.00041 │
+╰──────────────────────────────────────────────────────────────╯
+[36m(train_affinity_pipeline pid=1141942)[0m Worker running on: cuda
+[36m(train_affinity_pipeline pid=1141942)[0m GPU Name: AMD Instinct MI250X
+
+Trial train_affinity_pipeline_44c75_00014 completed after 10 iterations at 2026-09-26 23:57:04. Total running time: 8min 49s
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00014 result             │
+├──────────────────────────────────────────────────────────────┤
+│ checkpoint_dir_name                                          │
+│ time_this_iter_s                                     0.42832 │
+│ time_total_s                                         16.6465 │
+│ training_iteration                                        10 │
+│ mae                                                   1.1615 │
+│ r2_score                                             0.38439 │
+│ rmse                                                 1.46985 │
+╰──────────────────────────────────────────────────────────────╯
+
+Trial status: 15 TERMINATED | 1 PENDING
+Current time: 2026-09-26 23:57:16. Total running time: 9min 1s
+Logical resource usage: 2.0/16 CPUs, 1.0/1 GPUs (0.0/1.0 accelerator_type:AMD-Instinct-MI250X)
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name                            status         hidden_dim     dropout            lr     batch_size     iter     total time (s)     r2_score      rmse       mae │
+├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ train_affinity_pipeline_44c75_00000   TERMINATED            256    0.214422   0.000242169             64       40            33.2933     0.466596   1.3682    1.05891 │
+│ train_affinity_pipeline_44c75_00001   TERMINATED           1024    0.128783   0.00244398             128       40            23.05       0.47849    1.35286   1.03565 │
+│ train_affinity_pipeline_44c75_00002   TERMINATED            256    0.388812   0.000383226             32       10            19.8959     0.382818   1.47173   1.15694 │
+│ train_affinity_pipeline_44c75_00003   TERMINATED            512    0.252      0.00252332              32       10            20.0442     0.447786   1.39212   1.08684 │
+│ train_affinity_pipeline_44c75_00004   TERMINATED            512    0.183388   0.000705962            128       40            22.9676     0.495819   1.3302    1.02009 │
+│ train_affinity_pipeline_44c75_00005   TERMINATED            512    0.121747   0.00331421              64       10            16.7918     0.426784   1.41834   1.11701 │
+│ train_affinity_pipeline_44c75_00006   TERMINATED            256    0.32755    0.0097137              128       10            14.9336     0.390883   1.46208   1.15752 │
+│ train_affinity_pipeline_44c75_00007   TERMINATED            256    0.12337    0.00324517              32       20            26.8917     0.47177    1.36155   1.0594  │
+│ train_affinity_pipeline_44c75_00008   TERMINATED            512    0.214538   0.000572764            128       40            23.3524     0.498489   1.32667   1.01868 │
+│ train_affinity_pipeline_44c75_00009   TERMINATED            512    0.261826   0.00124177             128       40            22.9062     0.501567   1.32259   1.01957 │
+│ train_affinity_pipeline_44c75_00010   TERMINATED            512    0.159574   0.00319245              32       40            42.0736     0.501829   1.32224   1.01787 │
+│ train_affinity_pipeline_44c75_00011   TERMINATED            256    0.202489   0.000136297             64       10            16.9354     0.424214   1.42152   1.11445 │
+│ train_affinity_pipeline_44c75_00012   TERMINATED            256    0.253406   0.00658773              32       10            19.7983     0.445771   1.39465   1.09749 │
+│ train_affinity_pipeline_44c75_00013   TERMINATED            512    0.294315   0.000282899             64       10            16.8415     0.421597   1.42475   1.12305 │
+│ train_affinity_pipeline_44c75_00014   TERMINATED            512    0.385198   0.000408637             64       10            16.6465     0.384393   1.46985   1.1615  │
+│ train_affinity_pipeline_44c75_00015   PENDING               512    0.337815   0.00297273              32                                                              │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Trial train_affinity_pipeline_44c75_00015 started with configuration:
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00015 config             │
+├──────────────────────────────────────────────────────────────┤
+│ batch_size                                                32 │
+│ dropout                                              0.33782 │
+│ hidden_dim                                               512 │
+│ lr                                                   0.00297 │
+╰──────────────────────────────────────────────────────────────╯
+[36m(train_affinity_pipeline pid=1142021)[0m Worker running on: cuda
+[36m(train_affinity_pipeline pid=1142021)[0m GPU Name: AMD Instinct MI250X
+
+Trial train_affinity_pipeline_44c75_00015 completed after 10 iterations at 2026-09-26 23:57:36. Total running time: 9min 21s
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00015 result             │
+├──────────────────────────────────────────────────────────────┤
+│ checkpoint_dir_name                                          │
+│ time_this_iter_s                                     0.74203 │
+│ time_total_s                                         19.4459 │
+│ training_iteration                                        10 │
+│ mae                                                  1.10834 │
+│ r2_score                                             0.42953 │
+│ rmse                                                 1.41494 │
+╰──────────────────────────────────────────────────────────────╯
+
+Trial status: 16 TERMINATED | 1 PENDING
+Current time: 2026-09-26 23:57:46. Total running time: 9min 31s
+Logical resource usage: 2.0/16 CPUs, 1.0/1 GPUs (0.0/1.0 accelerator_type:AMD-Instinct-MI250X)
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name                            status         hidden_dim     dropout            lr     batch_size     iter     total time (s)     r2_score      rmse       mae │
+├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ train_affinity_pipeline_44c75_00000   TERMINATED            256    0.214422   0.000242169             64       40            33.2933     0.466596   1.3682    1.05891 │
+│ train_affinity_pipeline_44c75_00001   TERMINATED           1024    0.128783   0.00244398             128       40            23.05       0.47849    1.35286   1.03565 │
+│ train_affinity_pipeline_44c75_00002   TERMINATED            256    0.388812   0.000383226             32       10            19.8959     0.382818   1.47173   1.15694 │
+│ train_affinity_pipeline_44c75_00003   TERMINATED            512    0.252      0.00252332              32       10            20.0442     0.447786   1.39212   1.08684 │
+│ train_affinity_pipeline_44c75_00004   TERMINATED            512    0.183388   0.000705962            128       40            22.9676     0.495819   1.3302    1.02009 │
+│ train_affinity_pipeline_44c75_00005   TERMINATED            512    0.121747   0.00331421              64       10            16.7918     0.426784   1.41834   1.11701 │
+│ train_affinity_pipeline_44c75_00006   TERMINATED            256    0.32755    0.0097137              128       10            14.9336     0.390883   1.46208   1.15752 │
+│ train_affinity_pipeline_44c75_00007   TERMINATED            256    0.12337    0.00324517              32       20            26.8917     0.47177    1.36155   1.0594  │
+│ train_affinity_pipeline_44c75_00008   TERMINATED            512    0.214538   0.000572764            128       40            23.3524     0.498489   1.32667   1.01868 │
+│ train_affinity_pipeline_44c75_00009   TERMINATED            512    0.261826   0.00124177             128       40            22.9062     0.501567   1.32259   1.01957 │
+│ train_affinity_pipeline_44c75_00010   TERMINATED            512    0.159574   0.00319245              32       40            42.0736     0.501829   1.32224   1.01787 │
+│ train_affinity_pipeline_44c75_00011   TERMINATED            256    0.202489   0.000136297             64       10            16.9354     0.424214   1.42152   1.11445 │
+│ train_affinity_pipeline_44c75_00012   TERMINATED            256    0.253406   0.00658773              32       10            19.7983     0.445771   1.39465   1.09749 │
+│ train_affinity_pipeline_44c75_00013   TERMINATED            512    0.294315   0.000282899             64       10            16.8415     0.421597   1.42475   1.12305 │
+│ train_affinity_pipeline_44c75_00014   TERMINATED            512    0.385198   0.000408637             64       10            16.6465     0.384393   1.46985   1.1615  │
+│ train_affinity_pipeline_44c75_00015   TERMINATED            512    0.337815   0.00297273              32       10            19.4459     0.429531   1.41494   1.10834 │
+│ train_affinity_pipeline_44c75_00016   PENDING               512    0.122909   0.00775358              32                                                              │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Trial train_affinity_pipeline_44c75_00016 started with configuration:
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00016 config             │
+├──────────────────────────────────────────────────────────────┤
+│ batch_size                                                32 │
+│ dropout                                              0.12291 │
+│ hidden_dim                                               512 │
+│ lr                                                   0.00775 │
+╰──────────────────────────────────────────────────────────────╯
+[36m(train_affinity_pipeline pid=1142099)[0m Worker running on: cuda
+[36m(train_affinity_pipeline pid=1142099)[0m GPU Name: AMD Instinct MI250X
+
+Trial status: 16 TERMINATED | 1 RUNNING
+Current time: 2026-09-26 23:58:16. Total running time: 10min 1s
+Logical resource usage: 2.0/16 CPUs, 1.0/1 GPUs (0.0/1.0 accelerator_type:AMD-Instinct-MI250X)
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name                            status         hidden_dim     dropout            lr     batch_size     iter     total time (s)     r2_score      rmse       mae │
+├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ train_affinity_pipeline_44c75_00016   RUNNING               512    0.122909   0.00775358              32       20            27.3711     0.489262   1.33882   1.04304 │
+│ train_affinity_pipeline_44c75_00000   TERMINATED            256    0.214422   0.000242169             64       40            33.2933     0.466596   1.3682    1.05891 │
+│ train_affinity_pipeline_44c75_00001   TERMINATED           1024    0.128783   0.00244398             128       40            23.05       0.47849    1.35286   1.03565 │
+│ train_affinity_pipeline_44c75_00002   TERMINATED            256    0.388812   0.000383226             32       10            19.8959     0.382818   1.47173   1.15694 │
+│ train_affinity_pipeline_44c75_00003   TERMINATED            512    0.252      0.00252332              32       10            20.0442     0.447786   1.39212   1.08684 │
+│ train_affinity_pipeline_44c75_00004   TERMINATED            512    0.183388   0.000705962            128       40            22.9676     0.495819   1.3302    1.02009 │
+│ train_affinity_pipeline_44c75_00005   TERMINATED            512    0.121747   0.00331421              64       10            16.7918     0.426784   1.41834   1.11701 │
+│ train_affinity_pipeline_44c75_00006   TERMINATED            256    0.32755    0.0097137              128       10            14.9336     0.390883   1.46208   1.15752 │
+│ train_affinity_pipeline_44c75_00007   TERMINATED            256    0.12337    0.00324517              32       20            26.8917     0.47177    1.36155   1.0594  │
+│ train_affinity_pipeline_44c75_00008   TERMINATED            512    0.214538   0.000572764            128       40            23.3524     0.498489   1.32667   1.01868 │
+│ train_affinity_pipeline_44c75_00009   TERMINATED            512    0.261826   0.00124177             128       40            22.9062     0.501567   1.32259   1.01957 │
+│ train_affinity_pipeline_44c75_00010   TERMINATED            512    0.159574   0.00319245              32       40            42.0736     0.501829   1.32224   1.01787 │
+│ train_affinity_pipeline_44c75_00011   TERMINATED            256    0.202489   0.000136297             64       10            16.9354     0.424214   1.42152   1.11445 │
+│ train_affinity_pipeline_44c75_00012   TERMINATED            256    0.253406   0.00658773              32       10            19.7983     0.445771   1.39465   1.09749 │
+│ train_affinity_pipeline_44c75_00013   TERMINATED            512    0.294315   0.000282899             64       10            16.8415     0.421597   1.42475   1.12305 │
+│ train_affinity_pipeline_44c75_00014   TERMINATED            512    0.385198   0.000408637             64       10            16.6465     0.384393   1.46985   1.1615  │
+│ train_affinity_pipeline_44c75_00015   TERMINATED            512    0.337815   0.00297273              32       10            19.4459     0.429531   1.41494   1.10834 │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Trial train_affinity_pipeline_44c75_00016 completed after 40 iterations at 2026-09-26 23:58:30. Total running time: 10min 15s
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00016 result             │
+├──────────────────────────────────────────────────────────────┤
+│ checkpoint_dir_name                                          │
+│ time_this_iter_s                                     0.74171 │
+│ time_total_s                                         42.2675 │
+│ training_iteration                                        40 │
+│ mae                                                   1.0369 │
+│ r2_score                                             0.48239 │
+│ rmse                                                 1.34779 │
+╰──────────────────────────────────────────────────────────────╯
+
+Trial train_affinity_pipeline_44c75_00017 started with configuration:
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00017 config             │
+├──────────────────────────────────────────────────────────────┤
+│ batch_size                                               128 │
+│ dropout                                               0.2471 │
+│ hidden_dim                                              1024 │
+│ lr                                                   0.00196 │
+╰──────────────────────────────────────────────────────────────╯
+[36m(train_affinity_pipeline pid=1142183)[0m Worker running on: cuda
+[36m(train_affinity_pipeline pid=1142183)[0m GPU Name: AMD Instinct MI250X
+
+Trial status: 17 TERMINATED | 1 RUNNING
+Current time: 2026-09-26 23:58:46. Total running time: 10min 31s
+Logical resource usage: 2.0/16 CPUs, 1.0/1 GPUs (0.0/1.0 accelerator_type:AMD-Instinct-MI250X)
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name                            status         hidden_dim     dropout            lr     batch_size     iter     total time (s)     r2_score      rmse       mae │
+├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ train_affinity_pipeline_44c75_00017   RUNNING              1024    0.247095   0.00195527             128                                                              │
+│ train_affinity_pipeline_44c75_00000   TERMINATED            256    0.214422   0.000242169             64       40            33.2933     0.466596   1.3682    1.05891 │
+│ train_affinity_pipeline_44c75_00001   TERMINATED           1024    0.128783   0.00244398             128       40            23.05       0.47849    1.35286   1.03565 │
+│ train_affinity_pipeline_44c75_00002   TERMINATED            256    0.388812   0.000383226             32       10            19.8959     0.382818   1.47173   1.15694 │
+│ train_affinity_pipeline_44c75_00003   TERMINATED            512    0.252      0.00252332              32       10            20.0442     0.447786   1.39212   1.08684 │
+│ train_affinity_pipeline_44c75_00004   TERMINATED            512    0.183388   0.000705962            128       40            22.9676     0.495819   1.3302    1.02009 │
+│ train_affinity_pipeline_44c75_00005   TERMINATED            512    0.121747   0.00331421              64       10            16.7918     0.426784   1.41834   1.11701 │
+│ train_affinity_pipeline_44c75_00006   TERMINATED            256    0.32755    0.0097137              128       10            14.9336     0.390883   1.46208   1.15752 │
+│ train_affinity_pipeline_44c75_00007   TERMINATED            256    0.12337    0.00324517              32       20            26.8917     0.47177    1.36155   1.0594  │
+│ train_affinity_pipeline_44c75_00008   TERMINATED            512    0.214538   0.000572764            128       40            23.3524     0.498489   1.32667   1.01868 │
+│ train_affinity_pipeline_44c75_00009   TERMINATED            512    0.261826   0.00124177             128       40            22.9062     0.501567   1.32259   1.01957 │
+│ train_affinity_pipeline_44c75_00010   TERMINATED            512    0.159574   0.00319245              32       40            42.0736     0.501829   1.32224   1.01787 │
+│ train_affinity_pipeline_44c75_00011   TERMINATED            256    0.202489   0.000136297             64       10            16.9354     0.424214   1.42152   1.11445 │
+│ train_affinity_pipeline_44c75_00012   TERMINATED            256    0.253406   0.00658773              32       10            19.7983     0.445771   1.39465   1.09749 │
+│ train_affinity_pipeline_44c75_00013   TERMINATED            512    0.294315   0.000282899             64       10            16.8415     0.421597   1.42475   1.12305 │
+│ train_affinity_pipeline_44c75_00014   TERMINATED            512    0.385198   0.000408637             64       10            16.6465     0.384393   1.46985   1.1615  │
+│ train_affinity_pipeline_44c75_00015   TERMINATED            512    0.337815   0.00297273              32       10            19.4459     0.429531   1.41494   1.10834 │
+│ train_affinity_pipeline_44c75_00016   TERMINATED            512    0.122909   0.00775358              32       40            42.2675     0.482393   1.34779   1.0369  │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Trial train_affinity_pipeline_44c75_00017 completed after 20 iterations at 2026-09-26 23:59:02. Total running time: 10min 46s
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00017 result             │
+├──────────────────────────────────────────────────────────────┤
+│ checkpoint_dir_name                                          │
+│ time_this_iter_s                                     0.26581 │
+│ time_total_s                                         18.0507 │
+│ training_iteration                                        20 │
+│ mae                                                  1.06846 │
+│ r2_score                                             0.46505 │
+│ rmse                                                 1.37018 │
+╰──────────────────────────────────────────────────────────────╯
+
+Trial train_affinity_pipeline_44c75_00018 started with configuration:
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00018 config             │
+├──────────────────────────────────────────────────────────────┤
+│ batch_size                                                64 │
+│ dropout                                              0.36094 │
+│ hidden_dim                                               512 │
+│ lr                                                   0.00051 │
+╰──────────────────────────────────────────────────────────────╯
+[36m(train_affinity_pipeline pid=1142262)[0m Worker running on: cuda
+[36m(train_affinity_pipeline pid=1142262)[0m GPU Name: AMD Instinct MI250X
+
+Trial status: 18 TERMINATED | 1 RUNNING
+Current time: 2026-09-26 23:59:16. Total running time: 11min 1s
+Logical resource usage: 2.0/16 CPUs, 1.0/1 GPUs (0.0/1.0 accelerator_type:AMD-Instinct-MI250X)
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name                            status         hidden_dim     dropout            lr     batch_size     iter     total time (s)     r2_score      rmse       mae │
+├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ train_affinity_pipeline_44c75_00018   RUNNING               512    0.360945   0.000512431             64                                                              │
+│ train_affinity_pipeline_44c75_00000   TERMINATED            256    0.214422   0.000242169             64       40            33.2933     0.466596   1.3682    1.05891 │
+│ train_affinity_pipeline_44c75_00001   TERMINATED           1024    0.128783   0.00244398             128       40            23.05       0.47849    1.35286   1.03565 │
+│ train_affinity_pipeline_44c75_00002   TERMINATED            256    0.388812   0.000383226             32       10            19.8959     0.382818   1.47173   1.15694 │
+│ train_affinity_pipeline_44c75_00003   TERMINATED            512    0.252      0.00252332              32       10            20.0442     0.447786   1.39212   1.08684 │
+│ train_affinity_pipeline_44c75_00004   TERMINATED            512    0.183388   0.000705962            128       40            22.9676     0.495819   1.3302    1.02009 │
+│ train_affinity_pipeline_44c75_00005   TERMINATED            512    0.121747   0.00331421              64       10            16.7918     0.426784   1.41834   1.11701 │
+│ train_affinity_pipeline_44c75_00006   TERMINATED            256    0.32755    0.0097137              128       10            14.9336     0.390883   1.46208   1.15752 │
+│ train_affinity_pipeline_44c75_00007   TERMINATED            256    0.12337    0.00324517              32       20            26.8917     0.47177    1.36155   1.0594  │
+│ train_affinity_pipeline_44c75_00008   TERMINATED            512    0.214538   0.000572764            128       40            23.3524     0.498489   1.32667   1.01868 │
+│ train_affinity_pipeline_44c75_00009   TERMINATED            512    0.261826   0.00124177             128       40            22.9062     0.501567   1.32259   1.01957 │
+│ train_affinity_pipeline_44c75_00010   TERMINATED            512    0.159574   0.00319245              32       40            42.0736     0.501829   1.32224   1.01787 │
+│ train_affinity_pipeline_44c75_00011   TERMINATED            256    0.202489   0.000136297             64       10            16.9354     0.424214   1.42152   1.11445 │
+│ train_affinity_pipeline_44c75_00012   TERMINATED            256    0.253406   0.00658773              32       10            19.7983     0.445771   1.39465   1.09749 │
+│ train_affinity_pipeline_44c75_00013   TERMINATED            512    0.294315   0.000282899             64       10            16.8415     0.421597   1.42475   1.12305 │
+│ train_affinity_pipeline_44c75_00014   TERMINATED            512    0.385198   0.000408637             64       10            16.6465     0.384393   1.46985   1.1615  │
+│ train_affinity_pipeline_44c75_00015   TERMINATED            512    0.337815   0.00297273              32       10            19.4459     0.429531   1.41494   1.10834 │
+│ train_affinity_pipeline_44c75_00016   TERMINATED            512    0.122909   0.00775358              32       40            42.2675     0.482393   1.34779   1.0369  │
+│ train_affinity_pipeline_44c75_00017   TERMINATED           1024    0.247095   0.00195527             128       20            18.0507     0.465052   1.37018   1.06846 │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Trial train_affinity_pipeline_44c75_00018 completed after 10 iterations at 2026-09-26 23:59:31. Total running time: 11min 16s
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00018 result             │
+├──────────────────────────────────────────────────────────────┤
+│ checkpoint_dir_name                                          │
+│ time_this_iter_s                                      0.4308 │
+│ time_total_s                                         16.7922 │
+│ training_iteration                                        10 │
+│ mae                                                  1.11376 │
+│ r2_score                                             0.42524 │
+│ rmse                                                 1.42025 │
+╰──────────────────────────────────────────────────────────────╯
+
+Trial train_affinity_pipeline_44c75_00019 started with configuration:
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00019 config             │
+├──────────────────────────────────────────────────────────────┤
+│ batch_size                                               128 │
+│ dropout                                              0.17706 │
+│ hidden_dim                                               256 │
+│ lr                                                    0.0006 │
+╰──────────────────────────────────────────────────────────────╯
+[36m(train_affinity_pipeline pid=1142340)[0m Worker running on: cuda
+[36m(train_affinity_pipeline pid=1142340)[0m GPU Name: AMD Instinct MI250X
+
+Trial status: 19 TERMINATED | 1 RUNNING
+Current time: 2026-09-26 23:59:46. Total running time: 11min 31s
+Logical resource usage: 2.0/16 CPUs, 1.0/1 GPUs (0.0/1.0 accelerator_type:AMD-Instinct-MI250X)
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name                            status         hidden_dim     dropout            lr     batch_size     iter     total time (s)     r2_score      rmse       mae │
+├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ train_affinity_pipeline_44c75_00019   RUNNING               256    0.177057   0.000603518            128                                                              │
+│ train_affinity_pipeline_44c75_00000   TERMINATED            256    0.214422   0.000242169             64       40            33.2933     0.466596   1.3682    1.05891 │
+│ train_affinity_pipeline_44c75_00001   TERMINATED           1024    0.128783   0.00244398             128       40            23.05       0.47849    1.35286   1.03565 │
+│ train_affinity_pipeline_44c75_00002   TERMINATED            256    0.388812   0.000383226             32       10            19.8959     0.382818   1.47173   1.15694 │
+│ train_affinity_pipeline_44c75_00003   TERMINATED            512    0.252      0.00252332              32       10            20.0442     0.447786   1.39212   1.08684 │
+│ train_affinity_pipeline_44c75_00004   TERMINATED            512    0.183388   0.000705962            128       40            22.9676     0.495819   1.3302    1.02009 │
+│ train_affinity_pipeline_44c75_00005   TERMINATED            512    0.121747   0.00331421              64       10            16.7918     0.426784   1.41834   1.11701 │
+│ train_affinity_pipeline_44c75_00006   TERMINATED            256    0.32755    0.0097137              128       10            14.9336     0.390883   1.46208   1.15752 │
+│ train_affinity_pipeline_44c75_00007   TERMINATED            256    0.12337    0.00324517              32       20            26.8917     0.47177    1.36155   1.0594  │
+│ train_affinity_pipeline_44c75_00008   TERMINATED            512    0.214538   0.000572764            128       40            23.3524     0.498489   1.32667   1.01868 │
+│ train_affinity_pipeline_44c75_00009   TERMINATED            512    0.261826   0.00124177             128       40            22.9062     0.501567   1.32259   1.01957 │
+│ train_affinity_pipeline_44c75_00010   TERMINATED            512    0.159574   0.00319245              32       40            42.0736     0.501829   1.32224   1.01787 │
+│ train_affinity_pipeline_44c75_00011   TERMINATED            256    0.202489   0.000136297             64       10            16.9354     0.424214   1.42152   1.11445 │
+│ train_affinity_pipeline_44c75_00012   TERMINATED            256    0.253406   0.00658773              32       10            19.7983     0.445771   1.39465   1.09749 │
+│ train_affinity_pipeline_44c75_00013   TERMINATED            512    0.294315   0.000282899             64       10            16.8415     0.421597   1.42475   1.12305 │
+│ train_affinity_pipeline_44c75_00014   TERMINATED            512    0.385198   0.000408637             64       10            16.6465     0.384393   1.46985   1.1615  │
+│ train_affinity_pipeline_44c75_00015   TERMINATED            512    0.337815   0.00297273              32       10            19.4459     0.429531   1.41494   1.10834 │
+│ train_affinity_pipeline_44c75_00016   TERMINATED            512    0.122909   0.00775358              32       40            42.2675     0.482393   1.34779   1.0369  │
+│ train_affinity_pipeline_44c75_00017   TERMINATED           1024    0.247095   0.00195527             128       20            18.0507     0.465052   1.37018   1.06846 │
+│ train_affinity_pipeline_44c75_00018   TERMINATED            512    0.360945   0.000512431             64       10            16.7922     0.42524    1.42025   1.11376 │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Trial train_affinity_pipeline_44c75_00019 completed after 40 iterations at 2026-09-27 00:00:09. Total running time: 11min 54s
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00019 result             │
+├──────────────────────────────────────────────────────────────┤
+│ checkpoint_dir_name                                          │
+│ time_this_iter_s                                     0.27165 │
+│ time_total_s                                         23.3418 │
+│ training_iteration                                        40 │
+│ mae                                                  1.02657 │
+│ r2_score                                             0.49345 │
+│ rmse                                                 1.33332 │
+╰──────────────────────────────────────────────────────────────╯
+
+Trial status: 20 TERMINATED | 1 PENDING
+Current time: 2026-09-27 00:00:16. Total running time: 12min 1s
+Logical resource usage: 2.0/16 CPUs, 1.0/1 GPUs (0.0/1.0 accelerator_type:AMD-Instinct-MI250X)
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name                            status         hidden_dim     dropout            lr     batch_size     iter     total time (s)     r2_score      rmse       mae │
+├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ train_affinity_pipeline_44c75_00000   TERMINATED            256    0.214422   0.000242169             64       40            33.2933     0.466596   1.3682    1.05891 │
+│ train_affinity_pipeline_44c75_00001   TERMINATED           1024    0.128783   0.00244398             128       40            23.05       0.47849    1.35286   1.03565 │
+│ train_affinity_pipeline_44c75_00002   TERMINATED            256    0.388812   0.000383226             32       10            19.8959     0.382818   1.47173   1.15694 │
+│ train_affinity_pipeline_44c75_00003   TERMINATED            512    0.252      0.00252332              32       10            20.0442     0.447786   1.39212   1.08684 │
+│ train_affinity_pipeline_44c75_00004   TERMINATED            512    0.183388   0.000705962            128       40            22.9676     0.495819   1.3302    1.02009 │
+│ train_affinity_pipeline_44c75_00020   PENDING              1024    0.172864   0.000806951             32                                                              │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+15 more TERMINATED
+
+Trial train_affinity_pipeline_44c75_00020 started with configuration:
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00020 config             │
+├──────────────────────────────────────────────────────────────┤
+│ batch_size                                                32 │
+│ dropout                                              0.17286 │
+│ hidden_dim                                              1024 │
+│ lr                                                   0.00081 │
+╰──────────────────────────────────────────────────────────────╯
+[36m(train_affinity_pipeline pid=1142420)[0m Worker running on: cuda
+[36m(train_affinity_pipeline pid=1142420)[0m GPU Name: AMD Instinct MI250X
+
+Trial status: 20 TERMINATED | 1 RUNNING
+Current time: 2026-09-27 00:00:46. Total running time: 12min 31s
+Logical resource usage: 2.0/16 CPUs, 1.0/1 GPUs (0.0/1.0 accelerator_type:AMD-Instinct-MI250X)
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name                            status         hidden_dim     dropout            lr     batch_size     iter     total time (s)     r2_score      rmse       mae │
+├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ train_affinity_pipeline_44c75_00020   RUNNING              1024    0.172864   0.000806951             32       14            23.3649     0.444351   1.39644   1.09274 │
+│ train_affinity_pipeline_44c75_00000   TERMINATED            256    0.214422   0.000242169             64       40            33.2933     0.466596   1.3682    1.05891 │
+│ train_affinity_pipeline_44c75_00001   TERMINATED           1024    0.128783   0.00244398             128       40            23.05       0.47849    1.35286   1.03565 │
+│ train_affinity_pipeline_44c75_00002   TERMINATED            256    0.388812   0.000383226             32       10            19.8959     0.382818   1.47173   1.15694 │
+│ train_affinity_pipeline_44c75_00003   TERMINATED            512    0.252      0.00252332              32       10            20.0442     0.447786   1.39212   1.08684 │
+│ train_affinity_pipeline_44c75_00004   TERMINATED            512    0.183388   0.000705962            128       40            22.9676     0.495819   1.3302    1.02009 │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+15 more TERMINATED
+
+Trial train_affinity_pipeline_44c75_00020 completed after 20 iterations at 2026-09-27 00:00:50. Total running time: 12min 35s
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00020 result             │
+├──────────────────────────────────────────────────────────────┤
+│ checkpoint_dir_name                                          │
+│ time_this_iter_s                                     0.73636 │
+│ time_total_s                                         27.7954 │
+│ training_iteration                                        20 │
+│ mae                                                  1.05304 │
+│ r2_score                                             0.47478 │
+│ rmse                                                 1.35767 │
+╰──────────────────────────────────────────────────────────────╯
+
+Trial train_affinity_pipeline_44c75_00021 started with configuration:
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00021 config             │
+├──────────────────────────────────────────────────────────────┤
+│ batch_size                                                64 │
+│ dropout                                              0.30762 │
+│ hidden_dim                                              1024 │
+│ lr                                                   0.00179 │
+╰──────────────────────────────────────────────────────────────╯
+[36m(train_affinity_pipeline pid=1142499)[0m Worker running on: cuda
+[36m(train_affinity_pipeline pid=1142499)[0m GPU Name: AMD Instinct MI250X
+
+Trial status: 21 TERMINATED | 1 RUNNING
+Current time: 2026-09-27 00:01:16. Total running time: 13min 1s
+Logical resource usage: 2.0/16 CPUs, 1.0/1 GPUs (0.0/1.0 accelerator_type:AMD-Instinct-MI250X)
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name                            status         hidden_dim     dropout            lr     batch_size     iter     total time (s)     r2_score      rmse       mae │
+├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ train_affinity_pipeline_44c75_00021   RUNNING              1024    0.307625   0.00179114              64        2            13.1593     0.322793   1.54164   1.21247 │
+│ train_affinity_pipeline_44c75_00000   TERMINATED            256    0.214422   0.000242169             64       40            33.2933     0.466596   1.3682    1.05891 │
+│ train_affinity_pipeline_44c75_00001   TERMINATED           1024    0.128783   0.00244398             128       40            23.05       0.47849    1.35286   1.03565 │
+│ train_affinity_pipeline_44c75_00002   TERMINATED            256    0.388812   0.000383226             32       10            19.8959     0.382818   1.47173   1.15694 │
+│ train_affinity_pipeline_44c75_00003   TERMINATED            512    0.252      0.00252332              32       10            20.0442     0.447786   1.39212   1.08684 │
+│ train_affinity_pipeline_44c75_00004   TERMINATED            512    0.183388   0.000705962            128       40            22.9676     0.495819   1.3302    1.02009 │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+16 more TERMINATED
+
+Trial train_affinity_pipeline_44c75_00021 completed after 10 iterations at 2026-09-27 00:01:19. Total running time: 13min 4s
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00021 result             │
+├──────────────────────────────────────────────────────────────┤
+│ checkpoint_dir_name                                          │
+│ time_this_iter_s                                     0.43081 │
+│ time_total_s                                         16.7258 │
+│ training_iteration                                        10 │
+│ mae                                                  1.13878 │
+│ r2_score                                             0.41227 │
+│ rmse                                                 1.43619 │
+╰──────────────────────────────────────────────────────────────╯
+
+Trial status: 22 TERMINATED | 1 PENDING
+Current time: 2026-09-27 00:01:46. Total running time: 13min 31s
+Logical resource usage: 2.0/16 CPUs, 1.0/1 GPUs (0.0/1.0 accelerator_type:AMD-Instinct-MI250X)
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name                            status         hidden_dim     dropout            lr     batch_size     iter     total time (s)     r2_score      rmse       mae │
+├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ train_affinity_pipeline_44c75_00000   TERMINATED            256    0.214422   0.000242169             64       40            33.2933     0.466596   1.3682    1.05891 │
+│ train_affinity_pipeline_44c75_00001   TERMINATED           1024    0.128783   0.00244398             128       40            23.05       0.47849    1.35286   1.03565 │
+│ train_affinity_pipeline_44c75_00002   TERMINATED            256    0.388812   0.000383226             32       10            19.8959     0.382818   1.47173   1.15694 │
+│ train_affinity_pipeline_44c75_00003   TERMINATED            512    0.252      0.00252332              32       10            20.0442     0.447786   1.39212   1.08684 │
+│ train_affinity_pipeline_44c75_00004   TERMINATED            512    0.183388   0.000705962            128       40            22.9676     0.495819   1.3302    1.02009 │
+│ train_affinity_pipeline_44c75_00022   PENDING               512    0.129332   0.00167697             128                                                              │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+17 more TERMINATED
+
+Trial train_affinity_pipeline_44c75_00022 started with configuration:
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00022 config             │
+├──────────────────────────────────────────────────────────────┤
+│ batch_size                                               128 │
+│ dropout                                              0.12933 │
+│ hidden_dim                                               512 │
+│ lr                                                   0.00168 │
+╰──────────────────────────────────────────────────────────────╯
+[36m(train_affinity_pipeline pid=1142581)[0m Worker running on: cuda
+[36m(train_affinity_pipeline pid=1142581)[0m GPU Name: AMD Instinct MI250X
+
+Trial train_affinity_pipeline_44c75_00022 completed after 40 iterations at 2026-09-27 00:02:13. Total running time: 13min 58s
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00022 result             │
+├──────────────────────────────────────────────────────────────┤
+│ checkpoint_dir_name                                          │
+│ time_this_iter_s                                     0.26126 │
+│ time_total_s                                         23.5923 │
+│ training_iteration                                        40 │
+│ mae                                                  1.02811 │
+│ r2_score                                             0.48688 │
+│ rmse                                                 1.34193 │
+╰──────────────────────────────────────────────────────────────╯
+
+Trial status: 23 TERMINATED | 1 PENDING
+Current time: 2026-09-27 00:02:16. Total running time: 14min 1s
+Logical resource usage: 2.0/16 CPUs, 1.0/1 GPUs (0.0/1.0 accelerator_type:AMD-Instinct-MI250X)
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name                            status         hidden_dim     dropout            lr     batch_size     iter     total time (s)     r2_score      rmse       mae │
+├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ train_affinity_pipeline_44c75_00000   TERMINATED            256    0.214422   0.000242169             64       40            33.2933     0.466596   1.3682    1.05891 │
+│ train_affinity_pipeline_44c75_00001   TERMINATED           1024    0.128783   0.00244398             128       40            23.05       0.47849    1.35286   1.03565 │
+│ train_affinity_pipeline_44c75_00002   TERMINATED            256    0.388812   0.000383226             32       10            19.8959     0.382818   1.47173   1.15694 │
+│ train_affinity_pipeline_44c75_00003   TERMINATED            512    0.252      0.00252332              32       10            20.0442     0.447786   1.39212   1.08684 │
+│ train_affinity_pipeline_44c75_00004   TERMINATED            512    0.183388   0.000705962            128       40            22.9676     0.495819   1.3302    1.02009 │
+│ train_affinity_pipeline_44c75_00023   PENDING               512    0.390044   0.00150701              64                                                              │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+18 more TERMINATED
+
+Trial train_affinity_pipeline_44c75_00023 started with configuration:
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00023 config             │
+├──────────────────────────────────────────────────────────────┤
+│ batch_size                                                64 │
+│ dropout                                              0.39004 │
+│ hidden_dim                                               512 │
+│ lr                                                   0.00151 │
+╰──────────────────────────────────────────────────────────────╯
+[36m(train_affinity_pipeline pid=1142664)[0m Worker running on: cuda
+[36m(train_affinity_pipeline pid=1142664)[0m GPU Name: AMD Instinct MI250X
+
+Trial train_affinity_pipeline_44c75_00023 completed after 10 iterations at 2026-09-27 00:02:43. Total running time: 14min 28s
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00023 result             │
+├──────────────────────────────────────────────────────────────┤
+│ checkpoint_dir_name                                          │
+│ time_this_iter_s                                     0.43342 │
+│ time_total_s                                         16.5471 │
+│ training_iteration                                        10 │
+│ mae                                                  1.10725 │
+│ r2_score                                             0.43757 │
+│ rmse                                                 1.40494 │
+╰──────────────────────────────────────────────────────────────╯
+
+Trial status: 24 TERMINATED | 1 PENDING
+Current time: 2026-09-27 00:02:46. Total running time: 14min 31s
+Logical resource usage: 2.0/16 CPUs, 1.0/1 GPUs (0.0/1.0 accelerator_type:AMD-Instinct-MI250X)
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name                            status         hidden_dim     dropout            lr     batch_size     iter     total time (s)     r2_score      rmse       mae │
+├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ train_affinity_pipeline_44c75_00000   TERMINATED            256    0.214422   0.000242169             64       40            33.2933     0.466596   1.3682    1.05891 │
+│ train_affinity_pipeline_44c75_00001   TERMINATED           1024    0.128783   0.00244398             128       40            23.05       0.47849    1.35286   1.03565 │
+│ train_affinity_pipeline_44c75_00002   TERMINATED            256    0.388812   0.000383226             32       10            19.8959     0.382818   1.47173   1.15694 │
+│ train_affinity_pipeline_44c75_00003   TERMINATED            512    0.252      0.00252332              32       10            20.0442     0.447786   1.39212   1.08684 │
+│ train_affinity_pipeline_44c75_00004   TERMINATED            512    0.183388   0.000705962            128       40            22.9676     0.495819   1.3302    1.02009 │
+│ train_affinity_pipeline_44c75_00024   PENDING              1024    0.185761   0.000328785            128                                                              │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+19 more TERMINATED
+
+Trial train_affinity_pipeline_44c75_00024 started with configuration:
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00024 config             │
+├──────────────────────────────────────────────────────────────┤
+│ batch_size                                               128 │
+│ dropout                                              0.18576 │
+│ hidden_dim                                              1024 │
+│ lr                                                   0.00033 │
+╰──────────────────────────────────────────────────────────────╯
+[36m(train_affinity_pipeline pid=1142743)[0m Worker running on: cuda
+[36m(train_affinity_pipeline pid=1142743)[0m GPU Name: AMD Instinct MI250X
+
+Trial status: 24 TERMINATED | 1 RUNNING
+Current time: 2026-09-27 00:03:16. Total running time: 15min 1s
+Logical resource usage: 2.0/16 CPUs, 1.0/1 GPUs (0.0/1.0 accelerator_type:AMD-Instinct-MI250X)
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name                            status         hidden_dim     dropout            lr     batch_size     iter     total time (s)     r2_score      rmse       mae │
+├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ train_affinity_pipeline_44c75_00024   RUNNING              1024    0.185761   0.000328785            128       30            20.7629     0.484477   1.34507   1.03337 │
+│ train_affinity_pipeline_44c75_00000   TERMINATED            256    0.214422   0.000242169             64       40            33.2933     0.466596   1.3682    1.05891 │
+│ train_affinity_pipeline_44c75_00001   TERMINATED           1024    0.128783   0.00244398             128       40            23.05       0.47849    1.35286   1.03565 │
+│ train_affinity_pipeline_44c75_00002   TERMINATED            256    0.388812   0.000383226             32       10            19.8959     0.382818   1.47173   1.15694 │
+│ train_affinity_pipeline_44c75_00003   TERMINATED            512    0.252      0.00252332              32       10            20.0442     0.447786   1.39212   1.08684 │
+│ train_affinity_pipeline_44c75_00004   TERMINATED            512    0.183388   0.000705962            128       40            22.9676     0.495819   1.3302    1.02009 │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+19 more TERMINATED
+
+Trial train_affinity_pipeline_44c75_00024 completed after 40 iterations at 2026-09-27 00:03:19. Total running time: 15min 4s
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00024 result             │
+├──────────────────────────────────────────────────────────────┤
+│ checkpoint_dir_name                                          │
+│ time_this_iter_s                                     0.26423 │
+│ time_total_s                                         23.4059 │
+│ training_iteration                                        40 │
+│ mae                                                  1.02439 │
+│ r2_score                                             0.48194 │
+│ rmse                                                 1.34838 │
+╰──────────────────────────────────────────────────────────────╯
+
+Trial train_affinity_pipeline_44c75_00025 started with configuration:
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00025 config             │
+├──────────────────────────────────────────────────────────────┤
+│ batch_size                                                32 │
+│ dropout                                              0.22111 │
+│ hidden_dim                                              1024 │
+│ lr                                                   0.00056 │
+╰──────────────────────────────────────────────────────────────╯
+[36m(train_affinity_pipeline pid=1142821)[0m Worker running on: cuda
+[36m(train_affinity_pipeline pid=1142821)[0m GPU Name: AMD Instinct MI250X
+
+Trial status: 25 TERMINATED | 1 RUNNING
+Current time: 2026-09-27 00:03:46. Total running time: 15min 31s
+Logical resource usage: 2.0/16 CPUs, 1.0/1 GPUs (0.0/1.0 accelerator_type:AMD-Instinct-MI250X)
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name                            status         hidden_dim     dropout            lr     batch_size     iter     total time (s)     r2_score      rmse       mae │
+├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ train_affinity_pipeline_44c75_00025   RUNNING              1024    0.221111   0.000564823             32        3            14.4275     0.371863   1.48474   1.162   │
+│ train_affinity_pipeline_44c75_00000   TERMINATED            256    0.214422   0.000242169             64       40            33.2933     0.466596   1.3682    1.05891 │
+│ train_affinity_pipeline_44c75_00001   TERMINATED           1024    0.128783   0.00244398             128       40            23.05       0.47849    1.35286   1.03565 │
+│ train_affinity_pipeline_44c75_00002   TERMINATED            256    0.388812   0.000383226             32       10            19.8959     0.382818   1.47173   1.15694 │
+│ train_affinity_pipeline_44c75_00003   TERMINATED            512    0.252      0.00252332              32       10            20.0442     0.447786   1.39212   1.08684 │
+│ train_affinity_pipeline_44c75_00004   TERMINATED            512    0.183388   0.000705962            128       40            22.9676     0.495819   1.3302    1.02009 │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+20 more TERMINATED
+
+Trial train_affinity_pipeline_44c75_00025 completed after 20 iterations at 2026-09-27 00:03:58. Total running time: 15min 43s
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00025 result             │
+├──────────────────────────────────────────────────────────────┤
+│ checkpoint_dir_name                                          │
+│ time_this_iter_s                                     0.73518 │
+│ time_total_s                                         26.9459 │
+│ training_iteration                                        20 │
+│ mae                                                  1.04626 │
+│ r2_score                                             0.48122 │
+│ rmse                                                 1.34932 │
+╰──────────────────────────────────────────────────────────────╯
+
+Trial train_affinity_pipeline_44c75_00026 started with configuration:
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00026 config             │
+├──────────────────────────────────────────────────────────────┤
+│ batch_size                                                32 │
+│ dropout                                              0.23146 │
+│ hidden_dim                                              1024 │
+│ lr                                                   0.00031 │
+╰──────────────────────────────────────────────────────────────╯
+[36m(train_affinity_pipeline pid=1142901)[0m Worker running on: cuda
+[36m(train_affinity_pipeline pid=1142901)[0m GPU Name: AMD Instinct MI250X
+
+Trial status: 26 TERMINATED | 1 RUNNING
+Current time: 2026-09-27 00:04:16. Total running time: 16min 1s
+Logical resource usage: 2.0/16 CPUs, 1.0/1 GPUs (0.0/1.0 accelerator_type:AMD-Instinct-MI250X)
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name                            status         hidden_dim     dropout            lr     batch_size     iter     total time (s)     r2_score      rmse       mae │
+├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ train_affinity_pipeline_44c75_00026   RUNNING              1024    0.231461   0.000309543             32                                                              │
+│ train_affinity_pipeline_44c75_00000   TERMINATED            256    0.214422   0.000242169             64       40            33.2933     0.466596   1.3682    1.05891 │
+│ train_affinity_pipeline_44c75_00001   TERMINATED           1024    0.128783   0.00244398             128       40            23.05       0.47849    1.35286   1.03565 │
+│ train_affinity_pipeline_44c75_00002   TERMINATED            256    0.388812   0.000383226             32       10            19.8959     0.382818   1.47173   1.15694 │
+│ train_affinity_pipeline_44c75_00003   TERMINATED            512    0.252      0.00252332              32       10            20.0442     0.447786   1.39212   1.08684 │
+│ train_affinity_pipeline_44c75_00004   TERMINATED            512    0.183388   0.000705962            128       40            22.9676     0.495819   1.3302    1.02009 │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+21 more TERMINATED
+Trial status: 26 TERMINATED | 1 RUNNING
+Current time: 2026-09-27 00:04:46. Total running time: 16min 31s
+Logical resource usage: 2.0/16 CPUs, 1.0/1 GPUs (0.0/1.0 accelerator_type:AMD-Instinct-MI250X)
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name                            status         hidden_dim     dropout            lr     batch_size     iter     total time (s)     r2_score      rmse       mae │
+├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ train_affinity_pipeline_44c75_00026   RUNNING              1024    0.231461   0.000309543             32       32            35.8948     0.460205   1.37637   1.06376 │
+│ train_affinity_pipeline_44c75_00000   TERMINATED            256    0.214422   0.000242169             64       40            33.2933     0.466596   1.3682    1.05891 │
+│ train_affinity_pipeline_44c75_00001   TERMINATED           1024    0.128783   0.00244398             128       40            23.05       0.47849    1.35286   1.03565 │
+│ train_affinity_pipeline_44c75_00002   TERMINATED            256    0.388812   0.000383226             32       10            19.8959     0.382818   1.47173   1.15694 │
+│ train_affinity_pipeline_44c75_00003   TERMINATED            512    0.252      0.00252332              32       10            20.0442     0.447786   1.39212   1.08684 │
+│ train_affinity_pipeline_44c75_00004   TERMINATED            512    0.183388   0.000705962            128       40            22.9676     0.495819   1.3302    1.02009 │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+21 more TERMINATED
+
+Trial train_affinity_pipeline_44c75_00026 completed after 40 iterations at 2026-09-27 00:04:52. Total running time: 16min 37s
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00026 result             │
+├──────────────────────────────────────────────────────────────┤
+│ checkpoint_dir_name                                          │
+│ time_this_iter_s                                     0.73998 │
+│ time_total_s                                         41.8066 │
+│ training_iteration                                        40 │
+│ mae                                                  1.04178 │
+│ r2_score                                             0.47661 │
+│ rmse                                                  1.3553 │
+╰──────────────────────────────────────────────────────────────╯
+
+Trial train_affinity_pipeline_44c75_00027 started with configuration:
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00027 config             │
+├──────────────────────────────────────────────────────────────┤
+│ batch_size                                               128 │
+│ dropout                                              0.12739 │
+│ hidden_dim                                              1024 │
+│ lr                                                    0.0039 │
+╰──────────────────────────────────────────────────────────────╯
+[36m(train_affinity_pipeline pid=1142984)[0m GPU Name: AMD Instinct MI250X
+[36m(train_affinity_pipeline pid=1142984)[0m Worker running on: cuda
+
+Trial status: 27 TERMINATED | 1 RUNNING
+Current time: 2026-09-27 00:05:16. Total running time: 17min 1s
+Logical resource usage: 2.0/16 CPUs, 1.0/1 GPUs (0.0/1.0 accelerator_type:AMD-Instinct-MI250X)
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name                            status         hidden_dim     dropout            lr     batch_size     iter     total time (s)     r2_score      rmse       mae │
+├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ train_affinity_pipeline_44c75_00027   RUNNING              1024    0.127386   0.00389746             128                                                              │
+│ train_affinity_pipeline_44c75_00000   TERMINATED            256    0.214422   0.000242169             64       40            33.2933     0.466596   1.3682    1.05891 │
+│ train_affinity_pipeline_44c75_00001   TERMINATED           1024    0.128783   0.00244398             128       40            23.05       0.47849    1.35286   1.03565 │
+│ train_affinity_pipeline_44c75_00002   TERMINATED            256    0.388812   0.000383226             32       10            19.8959     0.382818   1.47173   1.15694 │
+│ train_affinity_pipeline_44c75_00003   TERMINATED            512    0.252      0.00252332              32       10            20.0442     0.447786   1.39212   1.08684 │
+│ train_affinity_pipeline_44c75_00004   TERMINATED            512    0.183388   0.000705962            128       40            22.9676     0.495819   1.3302    1.02009 │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+22 more TERMINATED
+
+Trial train_affinity_pipeline_44c75_00027 completed after 40 iterations at 2026-09-27 00:05:29. Total running time: 17min 14s
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00027 result             │
+├──────────────────────────────────────────────────────────────┤
+│ checkpoint_dir_name                                          │
+│ time_this_iter_s                                     0.26409 │
+│ time_total_s                                         23.4627 │
+│ training_iteration                                        40 │
+│ mae                                                  1.03218 │
+│ r2_score                                             0.48632 │
+│ rmse                                                 1.34267 │
+╰──────────────────────────────────────────────────────────────╯
+
+Trial status: 28 TERMINATED | 1 PENDING
+Current time: 2026-09-27 00:05:47. Total running time: 17min 31s
+Logical resource usage: 2.0/16 CPUs, 1.0/1 GPUs (0.0/1.0 accelerator_type:AMD-Instinct-MI250X)
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name                            status         hidden_dim     dropout            lr     batch_size     iter     total time (s)     r2_score      rmse       mae │
+├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ train_affinity_pipeline_44c75_00000   TERMINATED            256    0.214422   0.000242169             64       40            33.2933     0.466596   1.3682    1.05891 │
+│ train_affinity_pipeline_44c75_00001   TERMINATED           1024    0.128783   0.00244398             128       40            23.05       0.47849    1.35286   1.03565 │
+│ train_affinity_pipeline_44c75_00002   TERMINATED            256    0.388812   0.000383226             32       10            19.8959     0.382818   1.47173   1.15694 │
+│ train_affinity_pipeline_44c75_00003   TERMINATED            512    0.252      0.00252332              32       10            20.0442     0.447786   1.39212   1.08684 │
+│ train_affinity_pipeline_44c75_00004   TERMINATED            512    0.183388   0.000705962            128       40            22.9676     0.495819   1.3302    1.02009 │
+│ train_affinity_pipeline_44c75_00028   PENDING               256    0.351509   0.00049635              32                                                              │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+23 more TERMINATED
+
+Trial train_affinity_pipeline_44c75_00028 started with configuration:
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00028 config             │
+├──────────────────────────────────────────────────────────────┤
+│ batch_size                                                32 │
+│ dropout                                              0.35151 │
+│ hidden_dim                                               256 │
+│ lr                                                    0.0005 │
+╰──────────────────────────────────────────────────────────────╯
+[36m(train_affinity_pipeline pid=1143066)[0m Worker running on: cuda
+[36m(train_affinity_pipeline pid=1143066)[0m GPU Name: AMD Instinct MI250X
+
+Trial train_affinity_pipeline_44c75_00028 completed after 10 iterations at 2026-09-27 00:06:10. Total running time: 17min 55s
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00028 result             │
+├──────────────────────────────────────────────────────────────┤
+│ checkpoint_dir_name                                          │
+│ time_this_iter_s                                     0.75208 │
+│ time_total_s                                         20.9325 │
+│ training_iteration                                        10 │
+│ mae                                                  1.11109 │
+│ r2_score                                             0.42808 │
+│ rmse                                                 1.41674 │
+╰──────────────────────────────────────────────────────────────╯
+
+Trial status: 29 TERMINATED | 1 PENDING
+Current time: 2026-09-27 00:06:17. Total running time: 18min 2s
+Logical resource usage: 2.0/16 CPUs, 1.0/1 GPUs (0.0/1.0 accelerator_type:AMD-Instinct-MI250X)
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name                            status         hidden_dim     dropout            lr     batch_size     iter     total time (s)     r2_score      rmse       mae │
+├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ train_affinity_pipeline_44c75_00000   TERMINATED            256    0.214422   0.000242169             64       40            33.2933     0.466596   1.3682    1.05891 │
+│ train_affinity_pipeline_44c75_00001   TERMINATED           1024    0.128783   0.00244398             128       40            23.05       0.47849    1.35286   1.03565 │
+│ train_affinity_pipeline_44c75_00002   TERMINATED            256    0.388812   0.000383226             32       10            19.8959     0.382818   1.47173   1.15694 │
+│ train_affinity_pipeline_44c75_00003   TERMINATED            512    0.252      0.00252332              32       10            20.0442     0.447786   1.39212   1.08684 │
+│ train_affinity_pipeline_44c75_00004   TERMINATED            512    0.183388   0.000705962            128       40            22.9676     0.495819   1.3302    1.02009 │
+│ train_affinity_pipeline_44c75_00029   PENDING               512    0.28485    0.0084067               32                                                              │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+24 more TERMINATED
+
+Trial train_affinity_pipeline_44c75_00029 started with configuration:
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00029 config             │
+├──────────────────────────────────────────────────────────────┤
+│ batch_size                                                32 │
+│ dropout                                              0.28485 │
+│ hidden_dim                                               512 │
+│ lr                                                   0.00841 │
+╰──────────────────────────────────────────────────────────────╯
+[36m(train_affinity_pipeline pid=1143145)[0m GPU Name: AMD Instinct MI250X
+[36m(train_affinity_pipeline pid=1143145)[0m Worker running on: cuda
+
+Trial train_affinity_pipeline_44c75_00029 completed after 10 iterations at 2026-09-27 00:06:46. Total running time: 18min 31s
+╭──────────────────────────────────────────────────────────────╮
+│ Trial train_affinity_pipeline_44c75_00029 result             │
+├──────────────────────────────────────────────────────────────┤
+│ checkpoint_dir_name                                          │
+│ time_this_iter_s                                     0.72883 │
+│ time_total_s                                         20.3895 │
+│ training_iteration                                        10 │
+│ mae                                                  1.09376 │
+│ r2_score                                             0.44502 │
+│ rmse                                                  1.3956 │
+╰──────────────────────────────────────────────────────────────╯
+
+Trial status: 30 TERMINATED
+Current time: 2026-09-27 00:06:46. Total running time: 18min 31s
+Logical resource usage: 0/16 CPUs, 0/1 GPUs (0.0/1.0 accelerator_type:AMD-Instinct-MI250X)
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name                            status         hidden_dim     dropout            lr     batch_size     iter     total time (s)     r2_score      rmse       mae │
+├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ train_affinity_pipeline_44c75_00000   TERMINATED            256    0.214422   0.000242169             64       40            33.2933     0.466596   1.3682    1.05891 │
+│ train_affinity_pipeline_44c75_00001   TERMINATED           1024    0.128783   0.00244398             128       40            23.05       0.47849    1.35286   1.03565 │
+│ train_affinity_pipeline_44c75_00002   TERMINATED            256    0.388812   0.000383226             32       10            19.8959     0.382818   1.47173   1.15694 │
+│ train_affinity_pipeline_44c75_00003   TERMINATED            512    0.252      0.00252332              32       10            20.0442     0.447786   1.39212   1.08684 │
+│ train_affinity_pipeline_44c75_00004   TERMINATED            512    0.183388   0.000705962            128       40            22.9676     0.495819   1.3302    1.02009 │
+│ train_affinity_pipeline_44c75_00005   TERMINATED            512    0.121747   0.00331421              64       10            16.7918     0.426784   1.41834   1.11701 │
+│ train_affinity_pipeline_44c75_00006   TERMINATED            256    0.32755    0.0097137              128       10            14.9336     0.390883   1.46208   1.15752 │
+│ train_affinity_pipeline_44c75_00007   TERMINATED            256    0.12337    0.00324517              32       20            26.8917     0.47177    1.36155   1.0594  │
+│ train_affinity_pipeline_44c75_00008   TERMINATED            512    0.214538   0.000572764            128       40            23.3524     0.498489   1.32667   1.01868 │
+│ train_affinity_pipeline_44c75_00009   TERMINATED            512    0.261826   0.00124177             128       40            22.9062     0.501567   1.32259   1.01957 │
+│ train_affinity_pipeline_44c75_00010   TERMINATED            512    0.159574   0.00319245              32       40            42.0736     0.501829   1.32224   1.01787 │
+│ train_affinity_pipeline_44c75_00011   TERMINATED            256    0.202489   0.000136297             64       10            16.9354     0.424214   1.42152   1.11445 │
+│ train_affinity_pipeline_44c75_00012   TERMINATED            256    0.253406   0.00658773              32       10            19.7983     0.445771   1.39465   1.09749 │
+│ train_affinity_pipeline_44c75_00013   TERMINATED            512    0.294315   0.000282899             64       10            16.8415     0.421597   1.42475   1.12305 │
+│ train_affinity_pipeline_44c75_00014   TERMINATED            512    0.385198   0.000408637             64       10            16.6465     0.384393   1.46985   1.1615  │
+│ train_affinity_pipeline_44c75_00015   TERMINATED            512    0.337815   0.00297273              32       10            19.4459     0.429531   1.41494   1.10834 │
+│ train_affinity_pipeline_44c75_00016   TERMINATED            512    0.122909   0.00775358              32       40            42.2675     0.482393   1.34779   1.0369  │
+│ train_affinity_pipeline_44c75_00017   TERMINATED           1024    0.247095   0.00195527             128       20            18.0507     0.465052   1.37018   1.06846 │
+│ train_affinity_pipeline_44c75_00018   TERMINATED            512    0.360945   0.000512431             64       10            16.7922     0.42524    1.42025   1.11376 │
+│ train_affinity_pipeline_44c75_00019   TERMINATED            256    0.177057   0.000603518            128       40            23.3418     0.493447   1.33332   1.02657 │
+│ train_affinity_pipeline_44c75_00020   TERMINATED           1024    0.172864   0.000806951             32       20            27.7954     0.474775   1.35767   1.05304 │
+│ train_affinity_pipeline_44c75_00021   TERMINATED           1024    0.307625   0.00179114              64       10            16.7258     0.412268   1.43619   1.13878 │
+│ train_affinity_pipeline_44c75_00022   TERMINATED            512    0.129332   0.00167697             128       40            23.5923     0.486882   1.34193   1.02811 │
+│ train_affinity_pipeline_44c75_00023   TERMINATED            512    0.390044   0.00150701              64       10            16.5471     0.437568   1.40494   1.10725 │
+│ train_affinity_pipeline_44c75_00024   TERMINATED           1024    0.185761   0.000328785            128       40            23.4059     0.481942   1.34838   1.02439 │
+│ train_affinity_pipeline_44c75_00025   TERMINATED           1024    0.221111   0.000564823             32       20            26.9459     0.481215   1.34932   1.04626 │
+│ train_affinity_pipeline_44c75_00026   TERMINATED           1024    0.231461   0.000309543             32       40            41.8066     0.476609   1.3553    1.04178 │
+│ train_affinity_pipeline_44c75_00027   TERMINATED           1024    0.127386   0.00389746             128       40            23.4627     0.486319   1.34267   1.03218 │
+│ train_affinity_pipeline_44c75_00028   TERMINATED            256    0.351509   0.00049635              32       10            20.9325     0.428081   1.41674   1.11109 │
+│ train_affinity_pipeline_44c75_00029   TERMINATED            512    0.28485    0.0084067               32       10            20.3895     0.445017   1.3956    1.09376 │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+
+============================================================
+BEST RAY RESULT: PROTGPT2
+============================================================
+Validation R2   : 0.5018
+Validation RMSE : 1.3222
+Validation MAE  : 1.0179
+
+Best hyperparameters:
+hidden_dim: 512
+dropout: 0.1595740274340538
+lr: 0.003192454408269576
+batch_size: 32
+
+Training final model with best hyperparameters...
+
+============================================================
+FINAL UNTOUCHED TEST RESULTS: PROTGPT2
+============================================================
+Test R2   : 0.4921
+Test RMSE : 1.3475
+Test MAE  : 1.0256
+============================================================

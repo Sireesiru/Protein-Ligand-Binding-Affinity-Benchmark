@@ -1,0 +1,89 @@
+# ============================================================
+# Private / archival development material
+# ============================================================
+development/
+
+# ============================================================
+# PDBBind-derived local data
+# Keep README/documentation public, not dataset contents
+# ============================================================
+data/*
+!data/README.md
+
+# ============================================================
+# Precomputed embeddings
+# Keep README/documentation public, not binary arrays
+# ============================================================
+embeddings/*
+!embeddings/README.md
+
+# ============================================================
+# Large/binary ML artifacts
+# ============================================================
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+
+# ============================================================
+# HPC / runtime output
+# ============================================================
+*.out
+*.err
+slurm-*
+logs/
+ray_results/
+ray_results_*/
+ray_logs/
+
+# ============================================================
+# Python
+# ============================================================
+__pycache__/
+*.py[cod]
+*.so
+.pytest_cache/
+.mypy_cache/
+
+# ============================================================
+# Environments / caches
+# ============================================================
+.venv/
+venv/
+env/
+conda_env/
+.cache/
+hf_cache/
+huggingface/
+wandb/
+
+# ============================================================
+# Jupyter runtime/checkpoints
+# ============================================================
+.ipynb_checkpoints/
+.jupyter/
+jupyter_runtime/
+
+# ============================================================
+# OS/editor files
+# ============================================================
+.DS_Store
+Thumbs.db
+*.swp
+*.tmp
+
+# Keep curated experiment logs under results/
+!results/**/*.out
+
+# Track curated result logs
+!results/
+!results/ablation/
+!results/ablation/*.out
+!results/combined/
+!results/combined/*.out
+!results/xgb_shap/
+!results/xgb_shap/*.out
+!results/modality_shap/
+!results/modality_shap/*.out
+!results/fusion/
+!results/fusion/*.out

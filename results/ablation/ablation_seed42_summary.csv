@@ -1,0 +1,7 @@
+representation,mode,test_r2,test_rmse,test_mae
+ESM2,protein,0.3240,1.5546,1.1818
+ProstT5,protein,0.3660,1.5055,1.1494
+ProGen2,protein,0.1877,1.7041,1.3639
+Boltz,protein,0.3868,1.4806,1.1402
+ProtGPT2,protein,0.3869,1.4805,1.1257
+TxGemma,ligand,0.3953,1.4702,1.1305

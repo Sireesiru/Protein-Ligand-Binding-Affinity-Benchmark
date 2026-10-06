@@ -1,0 +1,237 @@
+no change     /autofs/nccs-svm1_sw/frontier/miniforge3/23.11.0-0/condabin/conda
+no change     /autofs/nccs-svm1_sw/frontier/miniforge3/23.11.0-0/bin/conda
+no change     /autofs/nccs-svm1_sw/frontier/miniforge3/23.11.0-0/bin/conda-env
+no change     /autofs/nccs-svm1_sw/frontier/miniforge3/23.11.0-0/bin/activate
+no change     /autofs/nccs-svm1_sw/frontier/miniforge3/23.11.0-0/bin/deactivate
+no change     /autofs/nccs-svm1_sw/frontier/miniforge3/23.11.0-0/etc/profile.d/conda.sh
+no change     /autofs/nccs-svm1_sw/frontier/miniforge3/23.11.0-0/etc/fish/conf.d/conda.fish
+no change     /autofs/nccs-svm1_sw/frontier/miniforge3/23.11.0-0/shell/condabin/Conda.psm1
+no change     /autofs/nccs-svm1_sw/frontier/miniforge3/23.11.0-0/shell/condabin/conda-hook.ps1
+no change     /autofs/nccs-svm1_sw/frontier/miniforge3/23.11.0-0/lib/python3.10/site-packages/xontrib/conda.xsh
+no change     /autofs/nccs-svm1_sw/frontier/miniforge3/23.11.0-0/etc/profile.d/conda.csh
+no change     /ccs/home/sireesiru/.bashrc
+No action taken.
+
+======================================================================
+XGBOOST + SHAP MODALITY ANALYSIS
+======================================================================
+
+DATA FILTERING
+Original samples : 19118
+After filtering  : 19116
+Removed          : 2
+
+Loading saved train/validation/test split:
+/lustre/orion/gen006/scratch/sireesiru/miniffinity/all_emb/XGB/pdbbind_split_seed42_esm2_protein.npz
+
+DATA SPLIT
+Train      : 13381 (70.0%)
+Validation : 2867 (15.0%)
+Test       : 2868 (15.0%)
+Split integrity check: PASSED
+
+Loading embeddings...
+esm2      : filtered now (19116, 1280)
+prostt5   : filtered now (19116, 1024)
+progen2   : filtered now (19116, 2560)
+boltz     : already filtered (19116, 384)
+protgpt2  : filtered now (19116, 1280)
+txgemma   : (19116, 2304)
+
+
+======================================================================
+PROCESSING: ESM2 + TXGEMMA
+======================================================================
+
+EMBEDDING DIMENSIONS
+Protein dimensions : 1280
+Ligand dimensions  : 2304
+Combined dimensions: 3584
+
+Training Random Forest for SHAP feature analysis...
+Calculating SHAP values...
+
+----------------------------------------------------------------------
+SHAP MODALITY CONTRIBUTION
+----------------------------------------------------------------------
+Protein contribution : 33.04%
+Ligand contribution  : 66.96%
+Dominant modality     : LIGAND
+
+TOP FEATURE COMPOSITION
+Protein features : 233 / 512
+Ligand features  : 279 / 512
+
+Training XGBoost...
+
+VALIDATION PERFORMANCE
+R2   : 0.5121
+RMSE : 1.3085
+MAE  : 1.0203
+
+FINAL UNTOUCHED TEST PERFORMANCE
+R2   : 0.5220
+RMSE : 1.3072
+MAE  : 1.0029
+
+
+======================================================================
+PROCESSING: PROSTT5 + TXGEMMA
+======================================================================
+
+EMBEDDING DIMENSIONS
+Protein dimensions : 1024
+Ligand dimensions  : 2304
+Combined dimensions: 3328
+
+Training Random Forest for SHAP feature analysis...
+Calculating SHAP values...
+
+----------------------------------------------------------------------
+SHAP MODALITY CONTRIBUTION
+----------------------------------------------------------------------
+Protein contribution : 49.91%
+Ligand contribution  : 50.09%
+Dominant modality     : LIGAND
+
+TOP FEATURE COMPOSITION
+Protein features : 274 / 512
+Ligand features  : 238 / 512
+
+Training XGBoost...
+
+VALIDATION PERFORMANCE
+R2   : 0.5417
+RMSE : 1.2682
+MAE  : 0.9941
+
+FINAL UNTOUCHED TEST PERFORMANCE
+R2   : 0.5524
+RMSE : 1.2650
+MAE  : 0.9666
+
+
+======================================================================
+PROCESSING: PROGEN2 + TXGEMMA
+======================================================================
+
+EMBEDDING DIMENSIONS
+Protein dimensions : 2560
+Ligand dimensions  : 2304
+Combined dimensions: 4864
+
+Training Random Forest for SHAP feature analysis...
+Calculating SHAP values...
+
+----------------------------------------------------------------------
+SHAP MODALITY CONTRIBUTION
+----------------------------------------------------------------------
+Protein contribution : 11.52%
+Ligand contribution  : 88.48%
+Dominant modality     : LIGAND
+
+TOP FEATURE COMPOSITION
+Protein features : 82 / 512
+Ligand features  : 430 / 512
+
+Training XGBoost...
+
+VALIDATION PERFORMANCE
+R2   : 0.4762
+RMSE : 1.3558
+MAE  : 1.0680
+
+FINAL UNTOUCHED TEST PERFORMANCE
+R2   : 0.4972
+RMSE : 1.3407
+MAE  : 1.0322
+
+
+======================================================================
+PROCESSING: BOLTZ + TXGEMMA
+======================================================================
+
+EMBEDDING DIMENSIONS
+Protein dimensions : 384
+Ligand dimensions  : 2304
+Combined dimensions: 2688
+
+Training Random Forest for SHAP feature analysis...
+Calculating SHAP values...
+
+----------------------------------------------------------------------
+SHAP MODALITY CONTRIBUTION
+----------------------------------------------------------------------
+Protein contribution : 42.17%
+Ligand contribution  : 57.83%
+Dominant modality     : LIGAND
+
+TOP FEATURE COMPOSITION
+Protein features : 224 / 512
+Ligand features  : 288 / 512
+
+Training XGBoost...
+
+VALIDATION PERFORMANCE
+R2   : 0.5363
+RMSE : 1.2757
+MAE  : 0.9977
+
+FINAL UNTOUCHED TEST PERFORMANCE
+R2   : 0.5434
+RMSE : 1.2776
+MAE  : 0.9824
+
+
+======================================================================
+PROCESSING: PROTGPT2 + TXGEMMA
+======================================================================
+
+EMBEDDING DIMENSIONS
+Protein dimensions : 1280
+Ligand dimensions  : 2304
+Combined dimensions: 3584
+
+Training Random Forest for SHAP feature analysis...
+Calculating SHAP values...
+
+----------------------------------------------------------------------
+SHAP MODALITY CONTRIBUTION
+----------------------------------------------------------------------
+Protein contribution : 45.74%
+Ligand contribution  : 54.26%
+Dominant modality     : LIGAND
+
+TOP FEATURE COMPOSITION
+Protein features : 303 / 512
+Ligand features  : 209 / 512
+
+Training XGBoost...
+
+VALIDATION PERFORMANCE
+R2   : 0.5409
+RMSE : 1.2693
+MAE  : 0.9911
+
+FINAL UNTOUCHED TEST PERFORMANCE
+R2   : 0.5469
+RMSE : 1.2727
+MAE  : 0.9758
+
+
+
+====================================================================================================
+FINAL XGBOOST + SHAP MODALITY SUMMARY
+====================================================================================================
+Model          Protein %    Ligand %        Bias   Prot Feat    Lig Feat    Val R2   Test R2
+----------------------------------------------------------------------------------------------------
+esm2              33.04%      66.96%      LIGAND         233         279    0.5121    0.5220
+prostt5           49.91%      50.09%      LIGAND         274         238    0.5417    0.5524
+progen2           11.52%      88.48%      LIGAND          82         430    0.4762    0.4972
+boltz             42.17%      57.83%      LIGAND         224         288    0.5363    0.5434
+protgpt2          45.74%      54.26%      LIGAND         303         209    0.5409    0.5469
+====================================================================================================
+
+Saved summary to: xgb_shap_modality_summary.csv
+
+Analysis complete.
