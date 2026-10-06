@@ -15,7 +15,6 @@ data/*
 # Keep README/documentation public, not binary arrays
 # ============================================================
 embeddings/*
-!embeddings/README.md
 
 # ============================================================
 # Large/binary ML artifacts
