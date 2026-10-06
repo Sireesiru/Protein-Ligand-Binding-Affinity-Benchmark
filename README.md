@@ -26,10 +26,9 @@ Together, these experiments distinguish representation quality, multimodal compl
        width="100%"
        height="600">
 </p>
----
 
 ## Representations used
-### Protein
+### 1. Protein
 | Representation | Representation type |
 |---|---|
 | ESM2 | Protein sequence representation |
@@ -38,7 +37,7 @@ Together, these experiments distinguish representation quality, multimodal compl
 | ProtGPT2 | Generative protein language-model representation |
 | Boltz | Structure-derived protein representation |
 
-### Ligand
+### 2. Ligand
 **TxGemma** is used as the fixed ligand representation throughout the benchmark.
 Keeping the ligand representation fixed allows differences in multimodal performance to be associated with the protein representation and its compatibility with the ligand representation.
 
@@ -105,20 +104,19 @@ Results will be added after completion of the benchmark.
 
 ## Modeling Pipelines used for benchmarking 
 
-### Multi Layer Percepteron(MLP)-based 
+### Multi Layer Perceptron (MLP)-based 
 The primary MLP workflow uses:
 
-1. 70/15/15 train/validation/test splitting
-2. train-only standardization of protein and ligand embeddings
-3. protein and ligand feature concatenation
-4. train-only mutual-information feature selection to 512 features
+1. Same 70/15/15 train/validation/test splitting
+2. Train-only standardization of protein and ligand embeddings
+3. Protein and ligand feature concatenation
+4. Train-only mutual-information feature selection to 512 features
 5. Ray Tune hyperparameter optimization with ASHA
-6. representation-specific optimal configurations selected using validation performance
-7. final MLP training
-8. evaluation on the untouched test set
+6. Representation-specific optimal configurations selected using validation performance.
+7. Final MLP training.
+8. Evaluation on the untouched test set.
 
-All protein representations use the same hyperparameter search protocol and search space.
-For reproducibility, we did repeated-split experiment. The previously selected representation-specific configurations are reused here rather than re-running hyperparameter optimization for every split.
+All protein representations use the same hyperparameter search protocol and search space. For reproducibility, we did repeated-split experiment. The previously selected representation-specific configurations are reused here rather than re-running hyperparameter optimization for every split.
 
 ### RF-SHAP + XGBoost-based pipeline 
 
@@ -132,9 +130,8 @@ The alternative modeling pipeline uses:
 6. Selection of the top 512 features
 7. XGBoost affinity prediction
 8. Protein- Vs. ligand attribution analysis
-
 This provides an alternative downstream learner and feature-selection strategy for testing whether representation rankings are specific to the MLP pipeline.
----
+
 ## Repository Contents
 
 ```text
@@ -200,7 +197,6 @@ The workflows require two locally prepared inputs:
 
 The final modeling dataset contains 19,116 complexes after exclusion of two problematic entries (`3ag9` and `5dyw`) from the original 19,118-row dataset.
 ### 2. Generate representations
-
 Embeddings generation code is provided for four protein sequence models and one ligand model as below
 
 | Representation | Code |
