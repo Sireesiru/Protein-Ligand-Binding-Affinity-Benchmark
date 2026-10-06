@@ -6,73 +6,26 @@ This study asks:
 
 > **How does the choice of pretrained protein representation affect protein–ligand binding-affinity prediction, particularly its ability to complement a fixed ligand representation?**
 
-We compare five pretrained protein representations — **ESM2, ProstT5, ProGen2, ProtGPT2, and Boltz** — while keeping the ligand representation (**TxGemma**) fixed.
+We compare five pretrained protein representations — **ESM2, ProstT5, ProGen2, ProtGPT2, and Boltz** — while keeping the ligand representation (**TxGemma**) fixed. Rather than asking only which representation gives the highest prediction accuracy, the benchmark follows six connected questions:
 
-Rather than asking only which representation gives the highest prediction accuracy, the benchmark addresses a sequence of related questions.
+| | Question | What it tests |
+|---|---|---|
+| **Q1** | **How informative is each protein representation on its own?** | Standalone affinity-relevant information |
+| **Q2** | **How much does each protein representation add beyond the ligand?** | Multimodal complementarity with fixed TxGemma |
+| **Q3** | **Are the observed differences robust?** | Stability across 10 random data splits |
+| **Q4** | **Do the conclusions depend on the downstream learner?** | MLP vs. RF-SHAP + XGBoost |
+| **Q5** | **How much does the model rely on protein versus ligand information?** | Protein–ligand modality attribution |
+| **Q6** | **Does the fusion strategy matter?** | Alternative feature-selection and fusion strategies |
 
-### Q1. How informative is each protein representation on its own?
-Protein-only models measure the affinity-relevant information captured by each pretrained protein representation.
-### Q2. How much does each protein representation add beyond the ligand representation?
-Each protein representation is combined with the same TxGemma ligand representation and compared with the ligand-only baseline.
-**ΔR² = R²(Protein + Ligand) − R²(Ligand)**
-This distinguishes **standalone representation strength** from **multimodal complementarity**.
-### Q3. Are these differences robust across different data splits?
-Protein-only, ligand-only, and combined models are repeated across 10 random train/validation/test splits to determine whether the observed representation differences are robust.
-### Q4. Do the conclusions depend on the downstream learning strategy?
-The original **MLP pipeline** is compared with an alternative **RF-SHAP feature-selection + XGBoost pipeline** to determine whether representation performance depends on how the embeddings are selected and learned.
-### Q5. How much does the combined model rely on protein versus ligand information?
-SHAP-based modality attribution is used to examine model reliance on protein and ligand features within the combined representation.
-### Q6. Does multimodal fusion strategy affect representation performance?
-Alternative feature-selection and fusion strategies are compared to determine whether the way protein and ligand representations are integrated changes their predictive utility.
----
+Together, these experiments distinguish representation quality, multimodal complementarity, and dependence on the downstream modeling strategy.
 
 ## Study Workflow
 
-```text
-                         PDBbind 2020
-                              │
-                ┌─────────────┴─────────────┐
-                │                           │
-             Protein                      Ligand
-                │                           │
-      ┌─────────┼─────────┐                 │
-      │         │         │                 │
-    ESM2     ProstT5   ProGen2           TxGemma
-    Boltz    ProtGPT2                    (fixed)
-      │         │         │                 │
-      └─────────┴─────────┴────────┬────────┘
-                                   │
-                         Representation benchmark
-                                   │
-                    ┌──────────────┼──────────────┐
-                    │              │              │
-                Protein-only   Ligand-only   Protein + Ligand
-                    │              │              │
-                    └──────────────┼──────────────┘
-                                   │
-                         Repeated-split analysis
-                                   │
-                    ┌──────────────┴──────────────┐
-                    │                             │
-              MLP pipeline                RF-SHAP + XGBoost
-                    │                             │
-                    └──────────────┬──────────────┘
-                                   │
-                       R² / RMSE / MAE comparison
-                                   │
-                    ┌──────────────┴──────────────┐
-                    │                             │
-             Modality attribution           Fusion analysis
-             Protein vs Ligand        MI / balanced MI / SHAP /
-                                           all features
-```
 
 ---
 
-## Representations
-
+## Representations used
 ### Protein
-
 | Representation | Representation type |
 |---|---|
 | ESM2 | Protein sequence representation |
@@ -82,13 +35,10 @@ Alternative feature-selection and fusion strategies are compared to determine wh
 | Boltz | Structure-derived protein representation |
 
 ### Ligand
-
 **TxGemma** is used as the fixed ligand representation throughout the benchmark.
-
 Keeping the ligand representation fixed allows differences in multimodal performance to be associated with the protein representation and its compatibility with the ligand representation.
 
 ---
-
 ## Results
 
 ### Q1–Q3: Representation information, complementarity, and robustness
@@ -147,15 +97,12 @@ The fusion benchmark evaluates whether multimodal performance changes when prote
 - modality-balanced mutual-information selection
 - RF-SHAP feature selection
 - all-feature fusion
-
 Results will be added after completion of the benchmark.
-
 ---
 
-## Modeling Pipelines
+## Modeling Pipelines used for benchmarking 
 
-### MLP benchmark
-
+### Multi Layer Percepteron(MLP)-based 
 The primary MLP workflow uses:
 
 1. 70/15/15 train/validation/test splitting
@@ -168,26 +115,23 @@ The primary MLP workflow uses:
 8. evaluation on the untouched test set
 
 All protein representations use the same hyperparameter search protocol and search space.
+For reproducibility, we did repeated-split experiment. The previously selected representation-specific configurations are reused here rather than re-running hyperparameter optimization for every split.
 
-For the repeated-split experiment, the previously selected representation-specific configurations are reused rather than rerunning hyperparameter optimization for every split.
-
-### RF-SHAP + XGBoost benchmark
+### RF-SHAP + XGBoost-based pipeline 
 
 The alternative modeling pipeline uses:
 
-1. the same input representations and train/validation/test partition
-2. train-only feature standardization
-3. protein and ligand concatenation
+1. The same input representations and train/validation/test partition
+2. Train-only feature standardization
+3. Protein and ligand concatenation
 4. Random Forest modeling
 5. SHAP-based feature ranking
-6. selection of the top 512 features
+6. Selection of the top 512 features
 7. XGBoost affinity prediction
-8. protein-versus-ligand attribution analysis
+8. Protein- Vs. ligand attribution analysis
 
 This provides an alternative downstream learner and feature-selection strategy for testing whether representation rankings are specific to the MLP pipeline.
-
 ---
-
 ## Repository Contents
 
 ```text
@@ -195,7 +139,7 @@ protein-ligand-binding-affinity-benchmark/
 ├── README.md
 │
 ├── data/
-│   └── local PDBbind-derived inputs (not distributed)
+│   └── local PDBbind-derived datasets (not distributed here)
 │
 ├── embedding_generation/
 │   ├── TxGemma_embedings.ipynb
@@ -206,7 +150,6 @@ protein-ligand-binding-affinity-benchmark/
 │
 ├── embeddings/
 │   └── generated embedding matrices (not tracked)
-│
 ├── splits/
 │   └── saved train/validation/test split indices
 │
@@ -243,27 +186,19 @@ protein-ligand-binding-affinity-benchmark/
 - **`results/xgb_shap/`** — RF-SHAP modality attribution, selected features, and XGBoost results.
 - **`results/modality_shap/`** — MLP modality-attribution analysis.
 - **`results/fusion/`** — multimodal fusion-strategy benchmark.
-
 ---
-
-## Reproducing the Benchmark
-
+## Reproducing the Benchmark 
 ### 1. Prepare the source data
-
-The study uses protein–ligand complexes and affinity measurements derived from **PDBbind 2020**.
-
-The PDBbind-derived input tables are **not distributed with this repository**.
-
+The study uses protein–ligand complexes and affinity measurements derived from **PDBbind 2020**. The PDBbind-derived input tables are **not distributed with this repository**.
 The workflows require two locally prepared inputs:
 
 - `pdbbind_canonical_affinities.csv`
 - `pdbbind_sequences.csv`
 
 The final modeling dataset contains 19,116 complexes after exclusion of two problematic entries (`3ag9` and `5dyw`) from the original 19,118-row dataset.
-
 ### 2. Generate representations
 
-Generation code is provided for:
+Embeddings generation code is provided for four protein sequence models and one ligand model as below
 
 | Representation | Code |
 |---|---|
@@ -274,10 +209,7 @@ Generation code is provided for:
 | TxGemma | `embedding_generation/TxGemma_embedings.ipynb` |
 
 Corresponding HPC launch scripts are provided under `slurm/`.
-
-The Boltz representation used in the current benchmark was obtained separately; its provenance/access procedure will be documented once confirmed.
-
-Generated matrices are stored locally under `embeddings/` and are excluded from Git.
+The Boltz representation used in the current benchmark are calculated in-house for another study. They are obtained separately. Its provenance/access procedure will be documented soon. Generated matrices are stored locally under `embeddings/` and are excluded from Git.
 
 ### 3. Preserve sample alignment
 
@@ -295,19 +227,13 @@ The affinity table, protein sequences, protein embedding matrices, and TxGemma l
 | Fusion strategies | `src/mlp_fusion_benchmark.py` |
 
 ---
-
 ## Reproducibility
 
-Saved split files preserve the exact seed-42 partition used for the primary benchmark.
-
-Repeated-split results preserve performance across seeds 42–51.
-
+Saved split files preserve the exact seed-42 partition used for the primary benchmark.Repeated-split results preserve performance across seeds 42–51.
 The project was developed and evaluated on the **OLCF Frontier** system using SLURM-based execution.
-
 Large generated embedding matrices and PDBbind-derived source tables are intentionally kept outside the Git repository.
 
 ---
-
 ## Key Finding
 
 > **A pretrained protein representation should not be judged only by how informative it is independently. Its usefulness for multimodal affinity prediction also depends on how well it complements the ligand representation and how the combined representations are selected, fused, and learned.**
