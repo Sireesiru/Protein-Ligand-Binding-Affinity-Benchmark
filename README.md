@@ -21,9 +21,10 @@ Together, these experiments distinguish representation quality, multimodal compl
 
 ## Study Workflow
 <p align="Left">
-  <img src="Protein-Ligand Representation Benchmark Workflow.png"
+  <img src="Protein–Ligand Representation Benchmark Workflow.png"
        alt="Protein–Ligand Representation Benchmark Workflow"
-       width="100%">
+       width="100%"
+       height="600">
 </p>
 ---
 
@@ -89,7 +90,6 @@ Random Forest SHAP values were aggregated by modality before XGBoost training.
 | ProtGPT2 | 45.7% | 54.3% | 0.547 |
 
 These percentages describe **feature attribution/model reliance in the Random Forest SHAP analysis**. They should not be interpreted as the percentage of predictive R² explained by each modality.
-
 MLP-based modality SHAP analysis is also included in the benchmark.
 
 ### Q6: Fusion strategy
