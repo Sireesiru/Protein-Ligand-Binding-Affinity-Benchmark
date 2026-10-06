@@ -6,7 +6,7 @@ This study asks:
 
 > **How does the choice of pretrained protein representation affect protein–ligand binding-affinity prediction, particularly its ability to complement a fixed ligand representation?**
 
-We compare five pretrained protein representations — **ESM2, ProstT5, ProGen2, ProtGPT2, and Boltz** — while keeping the ligand representation (**TxGemma**) fixed. Rather than asking only which representation gives the highest prediction accuracy, the benchmark follows six connected questions:
+We combined five pretrained protein sequence and structural representations : **ESM2, ProstT5, ProGen2, ProtGPT2, and Boltz**  while keeping the ligand representation (**TxGemma**) fixed and compared the results. Rather than asking only which representation gives the highest prediction accuracy, the benchmark follows six connected questions:
 
 | | Question | What it tests |
 |---|---|---|
