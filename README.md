@@ -20,8 +20,11 @@ We combined five pretrained protein sequence and structural representations : **
 Together, these experiments distinguish representation quality, multimodal complementarity, and dependence on the downstream modeling strategy.
 
 ## Study Workflow
-
-
+<p align="Left">
+  <img src="Protein-Ligand Representation Benchmark Workflow.png"
+       alt="Protein–Ligand Representation Benchmark Workflow"
+       width="100%">
+</p>
 ---
 
 ## Representations used
