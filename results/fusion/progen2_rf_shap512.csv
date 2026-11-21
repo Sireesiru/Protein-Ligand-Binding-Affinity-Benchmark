@@ -1,0 +1,2 @@
+representation,strategy,n_features,protein_features,ligand_features,protein_feature_pct,ligand_feature_pct,best_val_r2,best_val_rmse,best_val_mae,best_hidden_dim,best_dropout,best_lr,best_batch_size,test_r2,test_rmse,test_mae
+progen2,rf_shap512,512,82,430,16.015625,83.984375,0.4117099642753601,1.4368711008066284,1.1081513166427612,512,0.1286230349471234,0.0005516155550704798,64,0.42195361852645874,1.4375223075130967,1.1036038398742676

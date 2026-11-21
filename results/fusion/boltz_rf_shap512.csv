@@ -1,0 +1,2 @@
+representation,strategy,n_features,protein_features,ligand_features,protein_feature_pct,ligand_feature_pct,best_val_r2,best_val_rmse,best_val_mae,best_hidden_dim,best_dropout,best_lr,best_batch_size,test_r2,test_rmse,test_mae
+boltz,rf_shap512,512,224,288,43.75,56.25,0.5156825184822083,1.3037284478429652,1.0114266872406006,256,0.313402585824595,0.003804968634158323,128,0.520075798034668,1.3098439635465808,0.9943181276321411

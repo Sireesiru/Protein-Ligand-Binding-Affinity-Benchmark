@@ -1,238 +1,101 @@
 # Protein–Ligand Binding Affinity Representation Benchmark
 
-## Study Question
+For binding-affinity prediction, the best-performing protein embedding depends on how protein and ligand features are fused and how well the model generalizes to unseen protein clusters. Boltz leads under global and balanced mutual information, ProstT5 leads under RF-SHAP, and ProtGPT2 leads with all features on the conventional random split. With all features held fixed, ESM2 leads on the 30% MMseqs protein-cluster-disjoint split.
 
-This study asks:
+![Protein–ligand representation benchmark workflow](<Protein–Ligand Representation Benchmark Workflow.png>)
 
-> **How does the choice of pretrained protein representation affect protein–ligand binding-affinity prediction, particularly its ability to complement a fixed ligand representation?**
+## 1. How does feature selection and fusion affect performance?
 
-We combined five pretrained protein sequence and structural representations : **ESM2, ProstT5, ProGen2, ProtGPT2, and Boltz**  while keeping the ligand representation (**TxGemma**) fixed and compared the results. Rather than asking only which representation gives the highest prediction accuracy, the benchmark follows six connected questions:
+The benchmark compares five pretrained protein representations. The ligand representation is fixed as TxGemma (2,304 dimensions).
 
-| | Question | What it tests |
-|---|---|---|
-| **Q1** | **How informative is each protein representation on its own?** | Standalone affinity-relevant information |
-| **Q2** | **How much does each protein representation add beyond the ligand?** | Multimodal complementarity with fixed TxGemma |
-| **Q3** | **Are the observed differences robust?** | Stability across 10 random data splits |
-| **Q4** | **Do the conclusions depend on the downstream learner?** | MLP vs. RF-SHAP + XGBoost |
-| **Q5** | **How much does the model rely on protein versus ligand information?** | Protein–ligand modality attribution |
-| **Q6** | **Does the fusion strategy matter?** | Alternative feature-selection and fusion strategies |
+| Protein representation | Dimensions |
+|---|---:|
+| ESM2 | 1,280 |
+| ProstT5 (ProtT5) | 1,024 |
+| ProGen2 | 2,560 |
+| Boltz protein representation | 384 |
+| ProtGPT2 | 1,280 |
 
-Together, these experiments distinguish representation quality, multimodal complementarity, and dependence on the downstream modeling strategy.
+The four integration conditions use the same conventional random split and an MLP for affinity prediction.
 
-## Study Workflow
-<p align="Left">
-  <img src="Protein–Ligand Representation Benchmark Workflow.png"
-       alt="Protein–Ligand Representation Benchmark Workflow"
-       width="100%"
-       height="600">
-</p>
+- **Global MI** ranks concatenated protein and ligand features by mutual information with affinity and retains the top 512.
+- **Modality-balanced MI** retains the top 256 features by mutual information within each modality.
+- **RF-SHAP** retains the top 512 features ranked by SHAP importance from a Random Forest.
+- **All-feature concatenation** passes every protein and ligand dimension to the MLP.
 
-## Representations used
-### 1. Protein
-| Representation | Representation type |
-|---|---|
-| ESM2 | Protein sequence representation |
-| ProstT5 | Sequence/structure-aware protein representation |
-| ProGen2 | Generative protein language-model representation |
-| ProtGPT2 | Generative protein language-model representation |
-| Boltz | Structure-derived protein representation |
+### Test R² by fusion strategy
 
-### 2. Ligand
-**TxGemma** is used as the fixed ligand representation throughout the benchmark.
-Keeping the ligand representation fixed allows differences in multimodal performance to be associated with the protein representation and its compatibility with the ligand representation.
-
----
-## Results
-
-### Q1–Q3: Representation information, complementarity, and robustness
-
-The table below summarizes performance across 10 random train/validation/test splits.
-
-| Protein representation | Protein R² | Ligand R² | Protein + Ligand R² | ΔR² |
+| Protein | Global MI | Balanced MI | RF-SHAP | All features |
 |---|---:|---:|---:|---:|
-| Boltz | 0.323 | 0.395 | **0.505** | **+0.110** |
-| ProstT5 | 0.343 | 0.377 | **0.471** | **+0.095** |
-| ProtGPT2 | 0.342 | 0.376 | **0.458** | **+0.083** |
-| ESM2 | 0.315 | 0.382 | **0.444** | **+0.062** |
-| ProGen2 | 0.154 | 0.376 | **0.150** | **−0.225** |
+| ESM2 | 0.450 | 0.507 | 0.501 | 0.507 |
+| ProstT5 | 0.506 | 0.531 | **0.540** | 0.539 |
+| ProGen2 | 0.183 | 0.423 | 0.422 | 0.449 |
+| Boltz | **0.531** | **0.538** | 0.520 | 0.529 |
+| ProtGPT2 | 0.492 | 0.522 | 0.534 | **0.546** |
 
-The results show that **unimodal representation quality and multimodal complementarity are distinct properties**.
+### Retained protein and ligand features
 
-Boltz, ProstT5, ProtGPT2, and ESM2 provide positive incremental information when combined with TxGemma. Under the evaluated MLP pipeline, ProGen2 does not provide the same complementary benefit.
+P denotes protein features and L denotes ligand features.
 
-### Q4: Does performance depend on the downstream learner?
+| Protein | Global MI | Balanced MI | RF-SHAP | All features |
+|---|---|---|---|---|
+| ESM2 | 25P / 487L | 256P / 256L | 233P / 279L | 1280P / 2304L |
+| ProstT5 | 484P / 28L | 256P / 256L | 274P / 238L | 1024P / 2304L |
+| ProGen2 | 512P / 0L | 256P / 256L | 82P / 430L | 2560P / 2304L |
+| Boltz | 206P / 306L | 256P / 256L | 224P / 288L | 384P / 2304L |
+| ProtGPT2 | 490P / 22L | 256P / 256L | 303P / 209L | 1280P / 2304L |
 
-The original MLP results were compared with an alternative pipeline using Random Forest SHAP feature selection followed by XGBoost.
+Global MI selected very different proportions of protein and ligand features depending on the embedding. It retained 25 protein and 487 ligand features for ESM2, and 512 protein and zero ligand features for ProGen2. ProGen2 was particularly sensitive to the integration choice. Its test R² was 0.183 with global MI and ranged from 0.422 to 0.449 across the three conditions that retained both modalities. Scores across the five embeddings were also more consistent within each of those three conditions. Boltz performed well with global MI and had the highest score under balanced MI.
 
-| Protein representation | MLP P+L R² | RF-SHAP + XGB R² | Difference |
-|---|---:|---:|---:|
-| ESM2 | 0.450 | 0.522 | +0.072 |
-| ProstT5 | 0.506 | 0.552 | +0.047 |
-| ProGen2 | 0.183 | 0.497 | **+0.314** |
-| Boltz | 0.531 | 0.543 | +0.012 |
-| ProtGPT2 | 0.492 | 0.547 | +0.055 |
+[Fusion result CSVs](results/fusion/)
 
-These are seed-42 results and therefore complement, rather than replace, the repeated-split MLP analysis above.
+## 2. How well do representations generalize to unseen protein space?
 
-The large change observed for ProGen2 illustrates an important point: **the apparent utility of a pretrained representation can depend strongly on the feature-selection and downstream learning strategy.**
+Both split conditions use all-feature concatenation, so feature selection is held fixed. The conventional random split is compared with a **30% MMseqs protein-cluster-disjoint split**, which assigns whole protein clusters to train, validation, or test.
 
-### Q5: Protein versus ligand attribution
+| Protein | Random R² | 30% cluster R² | R² drop | Retention |
+|---|---:|---:|---:|---:|
+| ESM2 | 0.507 | **0.2833** | 0.2237 | 55.9% |
+| ProstT5 | 0.539 | 0.1781 | 0.3609 | 33.0% |
+| ProGen2 | 0.449 | 0.2353 | 0.2137 | 52.4% |
+| Boltz | 0.529 | 0.2394 | 0.2896 | 45.3% |
+| ProtGPT2 | **0.546** | 0.2575 | 0.2885 | 47.2% |
 
-Random Forest SHAP values were aggregated by modality before XGBoost training.
+R² drop is random-split R² minus cluster-split R². Retention is cluster-split R² divided by random-split R², expressed as a percentage.
 
-| Protein representation | Protein attribution | Ligand attribution | XGB Test R² |
-|---|---:|---:|---:|
-| ESM2 | 33.0% | 67.0% | 0.522 |
-| ProstT5 | 49.9% | 50.1% | **0.552** |
-| ProGen2 | 11.5% | 88.5% | 0.497 |
-| Boltz | 42.2% | 57.8% | 0.543 |
-| ProtGPT2 | 45.7% | 54.3% | 0.547 |
+- **Random split** — ProtGPT2 > ProstT5 > Boltz > ESM2 > ProGen2
+- **30% MMseqs protein-cluster-disjoint split** — ESM2 > ProtGPT2 > Boltz ≈ ProGen2 > ProstT5
 
-These percentages describe **feature attribution/model reliance in the Random Forest SHAP analysis**. They should not be interpreted as the percentage of predictive R² explained by each modality.
-MLP-based modality SHAP analysis is also included in the benchmark.
+ESM2 moved from fourth on the conventional random split to first on the cluster-disjoint benchmark. ProstT5 showed the largest performance decrease, with a drop of 0.3609 R².
 
-### Q6: Fusion strategy
+These results come from one frozen cluster split, so small pairwise differences, such as the gap between Boltz and ProGen2, should be interpreted cautiously. The 30% value refers to the MMseqs clustering threshold. Pairwise identity across train and test proteins would require a separate audit.
 
-The fusion benchmark evaluates whether multimodal performance changes when protein and ligand information are integrated using different strategies:
+The planned generalization gradient is **Random → 50% → 40% → 30%**. The 50% and 40% evaluations are planned.
 
-- mutual-information selection from concatenated features
-- modality-balanced mutual-information selection
-- RF-SHAP feature selection
-- all-feature fusion
-Results will be added after completion of the benchmark.
----
+[Protein generalization result CSVs](results/protein_generalization/) · [Frozen cluster assignments and split files](splits/protein_clustering/)
 
-## Modeling Pipelines used for benchmarking 
+## Dataset and modeling
 
-### Multi Layer Perceptron (MLP)-based 
-The primary MLP workflow uses:
+The benchmark uses **PDBbind 2020** affinity measurements and includes **19,116 complexes** after excluding `3ag9` and `5dyw`. The train, validation, and test sets contain **13,381 / 2,867 / 2,868** complexes, respectively.
 
-1. Same 70/15/15 train/validation/test splitting
-2. Train-only standardization of protein and ligand embeddings
-3. Protein and ligand feature concatenation
-4. Train-only mutual-information feature selection to 512 features
-5. Ray Tune hyperparameter optimization with ASHA
-6. Representation-specific optimal configurations selected using validation performance.
-7. Final MLP training.
-8. Evaluation on the untouched test set.
+Standardization is fit on training data and applied to validation and test data. Feature selection, where applicable, is also fit on training data. Ray Tune with ASHA tunes the MLP using validation performance. The selected configuration is used to train the final MLP, and the held-out test set is used for evaluation.
 
-All protein representations use the same hyperparameter search protocol and search space. For reproducibility, we did repeated-split experiment. The previously selected representation-specific configurations are reused here rather than re-running hyperparameter optimization for every split.
+## Repository structure and reproducibility
 
-### RF-SHAP + XGBoost-based pipeline 
-
-The alternative modeling pipeline uses:
-
-1. The same input representations and train/validation/test partition
-2. Train-only feature standardization
-3. Protein and ligand concatenation
-4. Random Forest modeling
-5. SHAP-based feature ranking
-6. Selection of the top 512 features
-7. XGBoost affinity prediction
-8. Protein- Vs. ligand attribution analysis
-This provides an alternative downstream learner and feature-selection strategy for testing whether representation rankings are specific to the MLP pipeline.
-
-## Repository Contents
-
-```text
-protein-ligand-binding-affinity-benchmark/
-├── README.md
-│
-├── data/
-│   └── local PDBbind-derived datasets (not distributed here)
-│
-├── embedding_generation/
-│   ├── TxGemma_embedings.ipynb
-│   ├── protgpt2_embedding_generation.py
-│   ├── worker_decoder_progen2.py
-│   ├── worker_encoder_ESM2.py
-│   └── worker_encoder_prostT5.py
-│
-├── embeddings/
-│   └── generated embedding matrices (not tracked)
-├── splits/
-│   └── saved train/validation/test split indices
-│
-├── src/
-│   ├── FS_ray_tuning_ablation.py
-│   ├── FS_ray_tuning_modified.py
-│   ├── repeated_seed_mlp.py
-│   ├── revised_pipeline_shap_xgb.py
-│   ├── mlp_modality_shap.py
-│   └── mlp_fusion_benchmark.py
-│
-├── slurm/
-│   └── Frontier SLURM launch scripts
-│
-└── results/
-    ├── ablation/
-    ├── combined/
-    ├── repeated_seeds/
-    ├── xgb_shap/
-    ├── modality_shap/
-    └── fusion/
-```
-
-### What the folders contain
-
-- **`embedding_generation/`** — code used to generate the pretrained protein and ligand representations.
-- **`embeddings/`** — local generated embedding matrices. These large files are excluded from Git.
-- **`splits/`** — saved indices preserving the exact seed-42 train/validation/test split.
-- **`src/`** — modeling, ablation, robustness, SHAP, XGBoost, and fusion-analysis code.
-- **`slurm/`** — SLURM launch scripts used for execution on OLCF Frontier.
-- **`results/ablation/`** — protein-only and ligand-only results.
-- **`results/combined/`** — original protein + ligand MLP results.
-- **`results/repeated_seeds/`** — performance across seeds 42–51.
-- **`results/xgb_shap/`** — RF-SHAP modality attribution, selected features, and XGBoost results.
-- **`results/modality_shap/`** — MLP modality-attribution analysis.
-- **`results/fusion/`** — multimodal fusion-strategy benchmark.
----
-## Reproducing the Benchmark 
-### 1. Prepare the source data
-The study uses protein–ligand complexes and affinity measurements derived from **PDBbind 2020**. The PDBbind-derived input tables are **not distributed with this repository**.
-The workflows require two locally prepared inputs:
-
-- `pdbbind_canonical_affinities.csv`
-- `pdbbind_sequences.csv`
-
-The final modeling dataset contains 19,116 complexes after exclusion of two problematic entries (`3ag9` and `5dyw`) from the original 19,118-row dataset.
-### 2. Generate representations
-Embeddings generation code is provided for four protein sequence models and one ligand model as below
-
-| Representation | Code |
+| Path | Contents |
 |---|---|
-| ESM2 | `embedding_generation/worker_encoder_ESM2.py` |
-| ProstT5 | `embedding_generation/worker_encoder_prostT5.py` |
-| ProGen2 | `embedding_generation/worker_decoder_progen2.py` |
-| ProtGPT2 | `embedding_generation/protgpt2_embedding_generation.py` |
-| TxGemma | `embedding_generation/TxGemma_embedings.ipynb` |
+| `data/` | Location for locally prepared PDBbind-derived inputs |
+| `embedding_generation/` | Scripts for ESM2, ProstT5, ProGen2, and ProtGPT2 and a notebook for TxGemma |
+| `splits/` | Saved seed-42 random split indices and the frozen cluster split under `protein_clustering/` |
+| `src/` | Benchmark, split-generation, and supporting analysis scripts |
+| `slurm/` | Job launchers used on OLCF Frontier |
+| `results/` | Fusion, cluster generalization, ablation, combined MLP, repeated-split, and XGBoost artifacts |
 
-Corresponding HPC launch scripts are provided under `slurm/`.
-The Boltz representation used in the current benchmark are calculated in-house for another study. They are obtained separately. Its provenance/access procedure will be documented soon. Generated matrices are stored locally under `embeddings/` and are excluded from Git.
+1. Prepare `pdbbind_canonical_affinities.csv` and `pdbbind_sequences.csv` locally. These source tables are distributed separately from the repository.
+2. Generate the embeddings with the scripts and notebook under `embedding_generation/`. The Boltz embeddings were generated in-house for a separate study and must be obtained separately. Store matrices under the local `embeddings/` directory. Keep the affinity records, sequences, and all embedding matrices in the same complex order.
+3. Use the saved splits for the reported runs. The frozen cluster split is available as both CSV and NPZ. The cluster membership TSV is the input to `src/make_protein_cluster_split.py` when regenerating that split.
+4. Use `src/mlp_fusion_benchmark.py` for the random-split fusion comparison and `src/protein_cluster_generalization.py` for the cluster-disjoint benchmark. Use `slurm/mlp_fusion_benchmark.slurm` and `slurm/protein_cluster_generalization.slurm` as launcher references. Adjust the original Frontier paths and environment settings for your run.
 
-### 3. Preserve sample alignment
+## Supporting analyses
 
-The affinity table, protein sequences, protein embedding matrices, and TxGemma ligand embedding matrix must correspond to the same complexes in the same row order.
-
-### 4. Run the experiments
-
-| Scientific question | Script |
-|---|---|
-| Protein/ligand ablation | `src/FS_ray_tuning_ablation.py` |
-| Protein + ligand MLP | `src/FS_ray_tuning_modified.py` |
-| Repeated-split robustness | `src/repeated_seed_mlp.py` |
-| RF-SHAP + XGBoost | `src/revised_pipeline_shap_xgb.py` |
-| MLP modality attribution | `src/mlp_modality_shap.py` |
-| Fusion strategies | `src/mlp_fusion_benchmark.py` |
-
----
-## Reproducibility
-
-Saved split files preserve the exact seed-42 partition used for the primary benchmark.Repeated-split results preserve performance across seeds 42–51.
-The project was developed and evaluated on the **OLCF Frontier** system using SLURM-based execution.
-Large generated embedding matrices and PDBbind-derived source tables are intentionally kept outside the Git repository.
-
----
-## Key Finding
-
-> **A pretrained protein representation should not be judged only by how informative it is independently. Its usefulness for multimodal affinity prediction also depends on how well it complements the ligand representation and how the combined representations are selected, fused, and learned.**
+The protein-only and ligand-only ablations, combined MLP results, and repeated-split ligand complementarity analysis across seeds 42–51 are available under `results/ablation/`, `results/combined/`, and `results/repeated_seeds/`. The seed-42 RF-SHAP + XGBoost comparison and Random Forest modality attribution are under `results/xgb_shap/`. The XGBoost comparison uses a different final learner from the RF-SHAP condition in the fusion table. CKA and learned protein–ligand alignment are outside the two comparisons reported here.

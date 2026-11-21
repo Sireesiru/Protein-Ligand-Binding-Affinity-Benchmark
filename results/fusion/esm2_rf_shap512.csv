@@ -1,0 +1,2 @@
+representation,strategy,n_features,protein_features,ligand_features,protein_feature_pct,ligand_feature_pct,best_val_r2,best_val_rmse,best_val_mae,best_hidden_dim,best_dropout,best_lr,best_batch_size,test_r2,test_rmse,test_mae
+esm2,rf_shap512,512,233,279,45.5078125,54.4921875,0.5077880620956421,1.3143110042561514,1.0078144073486328,512,0.21854507080054436,0.007133747470888434,128,0.5006054639816284,1.3361498123022066,1.0064164400100708

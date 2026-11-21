@@ -1,0 +1,2 @@
+representation,split,seed,train_n,val_n,test_n,protein_features,ligand_features,total_features,fusion,best_val_r2,best_val_rmse,best_val_mae,best_hidden_dim,best_dropout,best_lr,best_batch_size,test_r2,test_rmse,test_mae
+protgpt2,mmseqs30_cluster_disjoint,42,13381,2867,2868,1280,2304,3584,all_features,0.2426685094833374,1.5523218914579886,1.2283521890640259,256,0.285244452888315,0.0016722697006183683,32,0.2575477957725525,1.5566025637157923,1.2197235822677612

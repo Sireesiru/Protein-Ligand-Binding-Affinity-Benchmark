@@ -1,0 +1,2 @@
+representation,strategy,n_features,protein_features,ligand_features,protein_feature_pct,ligand_feature_pct,best_val_r2,best_val_rmse,best_val_mae,best_hidden_dim,best_dropout,best_lr,best_batch_size,test_r2,test_rmse,test_mae
+prostt5,mi512,512,484,28,94.53125,5.46875,0.4899381399154663,1.3379302749884205,1.0421926975250244,256,0.11340648844430007,0.004539828111510468,128,0.5056085586547852,1.3294399707952897,1.020713210105896
